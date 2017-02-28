@@ -1,0 +1,36 @@
+= form_for @district do |f|
+  - if @district.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@district.errors.count, "error")} prohibited this district from being saved:"
+      ul
+        - @district.errors.full_messages.each do |message|
+          li = message
+
+  .field
+    = f.label :game
+    = f.text_field :game
+  .field
+    = f.label :name
+    = f.text_field :name
+  .field
+    = f.label :description
+    = f.text_area :description
+  .field
+    = f.label :wealth
+    = f.text_field :wealth
+    
+  .field
+    = f.collection_check_boxes(:faction_ids, Faction.all, :id, :name)
+
+  hr
+  
+  .field
+    = f.label :security_and_safety
+    = f.text_field :security_and_safety
+  .field
+    = f.label :criminal_influence
+    = f.text_field :criminal_influence
+  .field
+    = f.label :occult_influence
+    = f.text_field :occult_influence
+  .actions = f.submit

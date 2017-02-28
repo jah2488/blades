@@ -1,0 +1,15 @@
+p#notice = notice
+
+p
+  strong Game:
+  = @character.game
+p
+  strong Name:
+  = @character.name
+p
+  strong Description:
+  = @character.description
+
+= link_to 'Edit', edit_character_path(@character)
+'|
+= link_to 'Back', characters_path

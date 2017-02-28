@@ -1,0 +1,33 @@
+= form_for @faction do |f|
+  - if @faction.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@faction.errors.count, "error")} prohibited this faction from being saved:"
+      ul
+        - @faction.errors.full_messages.each do |message|
+          li = message
+
+  .field
+    = f.label :game
+    = f.text_field :game
+  .field
+    = f.label :category_id
+    = f.select :category_id, options_from_collection_for_select(Category.all, :id, :name)
+  .field
+    = f.label :name
+    = f.text_field :name
+  .field
+    = f.label :description
+    = f.text_area :description
+  .field
+    = f.label :reputation
+    = f.number_field :reputation
+  .field
+    = f.label :hold
+    = f.text_field :hold
+  .field
+    = f.label :turf
+    = f.text_field :turf
+  .field
+    = f.label :faction_status
+    = f.text_field :faction_status
+  .actions = f.submit

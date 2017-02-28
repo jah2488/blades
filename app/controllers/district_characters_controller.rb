@@ -1,0 +1,2 @@
+class DistrictCharactersController < ApplicationController
+end

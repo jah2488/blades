@@ -1,0 +1,31 @@
+h1 Listing players
+
+table
+  thead
+    tr
+      th Game
+      th Name
+      th Description
+      th Playbook
+      th Stress
+      th Coin
+      th
+      th
+      th
+
+  tbody
+    - @players.each do |player|
+      tr
+        td = player.game
+        td = player.name
+        td = player.description
+        td = player.playbook
+        td = player.stress
+        td = player.coin
+        td = link_to 'Show', player
+        td = link_to 'Edit', edit_player_path(player)
+        td = link_to 'Destroy', player, data: { confirm: 'Are you sure?' }, method: :delete
+
+br
+
+= link_to 'New Player', new_player_path

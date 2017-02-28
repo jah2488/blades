@@ -1,0 +1,30 @@
+p#notice = notice
+
+p
+  strong Game:
+  = @faction.game
+p
+  strong Category:
+  = @faction.category
+p
+  strong Name:
+  = @faction.name
+p
+  strong Description:
+  = @faction.description
+p
+  strong Reputation:
+  = @faction.reputation
+p
+  strong Hold:
+  = @faction.hold
+p
+  strong Turf:
+  = @faction.turf
+p
+  strong Faction status:
+  = @faction.faction_status
+
+= link_to 'Edit', edit_faction_path(@faction)
+'|
+= link_to 'Back', factions_path

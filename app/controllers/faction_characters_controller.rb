@@ -1,0 +1,2 @@
+class FactionCharactersController < ApplicationController
+end

@@ -1,0 +1,2 @@
+class PlayerTraumasController < ApplicationController
+end

@@ -1,0 +1,2 @@
+class Trauma < ApplicationRecord
+end

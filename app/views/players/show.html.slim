@@ -1,0 +1,24 @@
+p#notice = notice
+
+p
+  strong Game:
+  = @player.game
+p
+  strong Name:
+  = @player.name
+p
+  strong Description:
+  = @player.description
+p
+  strong Playbook:
+  = @player.playbook
+p
+  strong Stress:
+  = @player.stress
+p
+  strong Coin:
+  = @player.coin
+
+= link_to 'Edit', edit_player_path(@player)
+'|
+= link_to 'Back', players_path

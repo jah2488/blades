@@ -1,0 +1,27 @@
+p#notice = notice
+
+p
+  strong Game:
+  = @district.game
+p
+  strong Name:
+  = @district.name
+p
+  strong Description:
+  = @district.description
+p
+  strong Wealth:
+  = @district.wealth
+p
+  strong Security and safety:
+  = @district.security_and_safety
+p
+  strong Criminal influence:
+  = @district.criminal_influence
+p
+  strong Occult influence:
+  = @district.occult_influence
+
+= link_to 'Edit', edit_district_path(@district)
+'|
+= link_to 'Back', districts_path
