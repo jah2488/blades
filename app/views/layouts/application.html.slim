@@ -28,5 +28,6 @@ html
         = yield
 
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = javascript_pack_tag 'application'
     script
       = yield :elm

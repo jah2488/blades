@@ -15,15 +15,23 @@ module Blades
   end
 end
 
-module Elm
-  class Template < ::Tilt::Template
-    def prepare
-    end
-
-    def evaluate(scope, locals, &block)
-      puts `elm-make #{file} --output=#{Rails.root}/tmp/output.js`
-      `cat #{Rails.root}/tmp/output.js`
-    end
-  end
-end
-Sprockets.register_engine '.elm', Elm::Template
+# module Elm
+#   class Template < ::Tilt::Template
+#     def prepare
+#     end
+#
+#     def evaluate(scope, locals, &block)
+#       f = "#{Rails.root}/tmp/output.js"
+#       result = system "elm-make #{file} --output=#{f}"
+#       if result
+#         puts result
+#         contents = `cat #{f}`
+#         `rm #{f}`
+#         contents
+#       else
+#         ""
+#       end
+#     end
+#   end
+# end
+# Sprockets.register_engine '.elm', Elm::Template

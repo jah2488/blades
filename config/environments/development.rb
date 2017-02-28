@@ -1,4 +1,7 @@
 Rails.application.configure do
+  # Make javascript_pack_tag load assets from webpack-dev-server.
+  # config.x.webpacker[:dev_server_host] = "http://localhost:8080"
+
   # Settings specified here will take precedence over those in config/application.rb.
 
   # In the development environment your application's code is reloaded on
@@ -8,6 +11,9 @@ Rails.application.configure do
 
   # Do not eager load code on boot.
   config.eager_load = false
+
+  
+  config.assets.raise_runtime_errors = true
 
   # Show full error reports.
   config.consider_all_requests_local = true

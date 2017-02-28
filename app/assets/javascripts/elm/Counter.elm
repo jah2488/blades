@@ -1,10 +1,15 @@
-module Main exposing (..)
+module Bar exposing (..)
 
 import Html exposing (Html, div, text, button)
 import Html.Events exposing (onClick)
 
 
 type alias Model =
+    { counter : Int
+    }
+
+
+type alias Flags =
     { counter : Int
     }
 
@@ -43,11 +48,16 @@ view model =
         ]
 
 
-main : Program Never Model Msg
+init : Flags -> ( Model, Cmd Msg )
+init flags =
+    ( flags, Cmd.none )
+
+
+main : Program Flags Model Msg
 main =
-    Html.program
+    Html.programWithFlags
         { view = view
         , update = update
         , subscriptions = \_ -> Sub.none
-        , init = ( model, Cmd.none )
+        , init = init
         }

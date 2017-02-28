@@ -1,22 +1,27 @@
 module ApplicationHelper
   require 'securerandom'
 
-  def elm_component(name, flags = nil)
-    id = SecureRandom.uuid
+  def elm_view(name, flags = nil, tag: 'div', id: SecureRandom.uuid)
     content_for :elm do
-      if flags
-        if flags.is_a?(String)
-          json_flags = flags
-        else
-          json_flags = flags.to_json
-        end
-        """ Elm.#{name.to_s.titleize}.embed(document.getElementById('#{id}'), #{json_flags});
-        """.html_safe
-      else
-        """ Elm.#{name.to_s.titleize}.embed(document.getElementById('#{id}'));
-        """.html_safe
-      end
+      elm_embed(name, id, flags).html_safe
     end
-    """ <div id='#{id}'></div> """.html_safe
+
+    "<#{tag} id='#{id}'></#{tag}>".html_safe
+  end
+
+  private
+
+  def elm_embed(name, id, flags)
+    "#{embed_str(name, id)});" if flags.nil?
+    "#{embed_str(name, id)}, #{as_json(flags)});"
+  end
+
+  def embed_str(name, id)
+    "Elm.#{name.to_s.titleize}.embed(document.getElementById('#{id}')"
+  end
+
+  def as_json(flags)
+    return flags if flags.is_a?(String)
+    flags.to_json
   end
 end

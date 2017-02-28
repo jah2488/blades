@@ -18,6 +18,8 @@ table
   tbody
     - @factions.each do |faction|
       tr
+        td = elm_view(:faction, faction)
+      tr
         td = faction.game
         td = faction.category
         td = faction.name

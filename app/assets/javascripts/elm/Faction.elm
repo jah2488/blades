@@ -1,15 +1,25 @@
-module Counter exposing (..)
+module Faction exposing (..)
 
 import Html exposing (Html, div, text, button)
 import Html.Events exposing (onClick)
-
-
-type alias Model =
-    { counter : Int
-    }
+import Date exposing (Date)
 
 
 type alias Flags =
+    { id : Int
+    , game_id : Int
+    , category_id : Maybe Int
+    , name : String
+    , description : Maybe String
+    , reputation : Int
+    , hold : Int
+    , turf : Int
+    , faction_status : Int
+    , slug : String
+    }
+
+
+type alias Model =
     { counter : Int
     }
 
@@ -29,12 +39,12 @@ update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
         Increment ->
-            ( { model | counter = model.counter + 1 }
+            ( { model | counter = model.counter + 0 }
             , Cmd.none
             )
 
         Decrement ->
-            ( { model | counter = model.counter - 1 }
+            ( { model | counter = model.counter - 0 }
             , Cmd.none
             )
 
@@ -42,15 +52,15 @@ update msg model =
 view : Model -> Html Msg
 view model =
     div []
-        [ div [] [ button [ onClick Increment ] [ text "+" ] ]
+        [ div [] [ button [ onClick Increment ] [ text "+Rep" ] ]
         , div [] [ text <| toString model.counter ]
-        , div [] [ button [ onClick Decrement ] [ text "-" ] ]
+        , div [] [ button [ onClick Decrement ] [ text "-Rep" ] ]
         ]
 
 
 init : Flags -> ( Model, Cmd Msg )
 init flags =
-    ( flags, Cmd.none )
+    ( { counter = flags.id }, Cmd.none )
 
 
 main : Program Flags Model Msg

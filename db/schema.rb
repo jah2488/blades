@@ -80,15 +80,15 @@ ActiveRecord::Schema.define(version: 20170228030852) do
   create_table "factions", force: :cascade do |t|
     t.integer  "game_id"
     t.integer  "category_id"
-    t.string   "name",                         null: false
+    t.string   "name",                       null: false
     t.text     "description"
     t.integer  "reputation",     default: 0
-    t.string   "hold",           default: "0"
-    t.string   "turf",           default: "0"
+    t.integer  "hold",           default: 0
+    t.integer  "turf",           default: 0
     t.integer  "faction_status", default: 0
     t.string   "slug"
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
     t.index ["category_id"], name: "index_factions_on_category_id", using: :btree
     t.index ["game_id"], name: "index_factions_on_game_id", using: :btree
   end

@@ -6,8 +6,8 @@ class CreateFactions < ActiveRecord::Migration[5.0]
       t.string :name, null: false
       t.text :description
       t.integer :reputation, default: 0
-      t.string :hold, default: 0
-      t.string :turf, default: 0
+      t.integer :hold, default: 0
+      t.integer :turf, default: 0
       t.integer :faction_status, default: 0
 
       t.string :slug
