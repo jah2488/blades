@@ -15,3 +15,20 @@
 //= require turbolinks
 //= require elm
 //= require_tree .
+
+
+var elmEmbed = function (moduleName, id, flags)  {
+  var ElmModule = Elm[moduleName];
+  if (ElmModule) {
+    var node = document.getElementById(id);
+    if (flags) {
+      ElmModule.embed(node, flags);
+    } else {
+      ElmModule.embed(node);
+    }
+  } else {
+    console.error('I cannot find an Elm Module named ' + moduleName + '.\n' +
+      ' Double check the spelling and that the module has compiled.\n\n' +
+      '\tKnown Modules are: (' + Object.keys(Elm) + ') Did you mean one of them?');
+  }
+};

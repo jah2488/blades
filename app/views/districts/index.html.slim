@@ -1,7 +1,6 @@
 h1 Listing districts
 
-= elm_view(:main)
-= elm_view(:counter, @districts.first.attributes.merge(counter: 20))
+= elm_view(:Bar, flags: @districts.first.attributes.merge(counter: 20))
 
 table
   thead

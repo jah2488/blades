@@ -1,22 +1,7 @@
 h1 Listing categories
 
-table
-  thead
-    tr
-      th Name
-      th Description
-      th
-      th
-      th
-
-  tbody
-    - @categories.each do |category|
-      tr
-        td = category.name
-        td = category.description
-        td = link_to 'Show', category
-        td = link_to 'Edit', edit_category_path(category)
-        td = link_to 'Destroy', category, data: { confirm: 'Are you sure?' }, method: :delete
+- @categories.each do |category|
+  = elm_view('Category', flags: { category: category, factions: category.factions })
 
 br
 

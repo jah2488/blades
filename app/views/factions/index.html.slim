@@ -1,36 +1,7 @@
 h1 Listing factions
 
-table
-  thead
-    tr
-      th Game
-      th Category
-      th Name
-      th Description
-      th Reputation
-      th Hold
-      th Turf
-      th Faction status
-      th
-      th
-      th
-
-  tbody
-    - @factions.each do |faction|
-      tr
-        td = elm_view(:faction, faction)
-      tr
-        td = faction.game
-        td = faction.category
-        td = faction.name
-        td = faction.description
-        td = faction.reputation
-        td = faction.hold
-        td = faction.turf
-        td = faction.faction_status
-        td = link_to 'Show', faction
-        td = link_to 'Edit', edit_faction_path(faction)
-        td = link_to 'Destroy', faction, data: { confirm: 'Are you sure?' }, method: :delete
+- @factions.each do |faction|
+    = elm_view(:faction, flags: faction)
 
 br
 

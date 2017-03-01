@@ -12,6 +12,7 @@ module Blades
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
     config.active_record.primary_key = :uuid
+    config.assets.paths << "#{Rails.root}/app/assets/fonts"
   end
 end
 

@@ -1,0 +1,88 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require clrs
+ *= require skeleton
+ *= require_tree .
+ *= require_self
+ */
+
+@import 'clrs';
+
+@import url('https://fonts.googleapis.com/css?family=Crimson+Text');
+
+@font-face {
+  font-family: 'Kirsty';
+  src: url('Kirsty.ttf') format('truetype');
+}
+
+html, body, p, div, a {
+  font-family: 'Crimson Text', serif;
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: Kirsty, Helvetica, Arial;
+}
+
+nav {
+  clear: both;
+}
+
+nav ul {
+   list-style: none;
+   margin: 0.8em;
+}
+
+nav ul li {
+  display:inline-block;
+  padding: 1em;
+  font-size: 1.4em;
+}
+
+.faction {
+  background: white;
+  border: 2px solid $black;
+  margin: 2em 0em;
+  .name {
+    display: inline-block;
+    width: 70%;
+    font-family: Kirsty, Helvetica, Arial;
+    font-size: 1.7em;
+  }
+  .rep, .hold, .status {
+    display: inline-block;
+    text-align: center;
+    width: 10%;
+  }
+  .category {
+    background: $black;
+    color: $white;
+    padding: 1em;
+    font-size: 1.3em;
+  }
+  .information {
+    padding: 1em;
+
+    .rep, .hold, .status {
+      font-size: 1.4em;
+    }
+  }
+}
+
+div.actions {
+  margin: 0;
+
+  button {
+    margin: 0;
+    border-radius: 0;
+  }
+}

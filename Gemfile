@@ -12,6 +12,8 @@ end
 gem 'rails', '~> 5.1.0.beta1'
 gem 'webpacker', github: 'rails/webpacker'
 
+gem 'clrs'
+
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 0.18'
 # Use Puma as the app server
@@ -42,6 +44,7 @@ gem 'clearance'
 gem 'react-rails'
 gem 'slim-rails'
 gem 'faker'
+gem 'pundit'
 
 group :development, :test do
   gem 'dotenv-rails'

@@ -12,11 +12,16 @@ html
 
   body
     nav
-      - if signed_in?
-        p = "Signed in as: #{current_user.email}"
-        = button_to 'Sign out', sign_out_path, method: :delete
-      - else
-        = link_to 'Sign in', sign_in_path
+      ul
+        li = link_to "Factions", factions_path
+        li = link_to "Districts", districts_path
+        li = link_to "Characters", characters_path
+        li = link_to "Players", players_path
+        - if signed_in?
+          li = button_to 'Sign out', sign_out_path, method: :delete
+          li = "Signed in as: #{current_user.email}"
+        - else
+          li = link_to 'Sign in', sign_in_path      
 
 
     - flash.each do |key, value|
