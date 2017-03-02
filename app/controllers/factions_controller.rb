@@ -33,7 +33,14 @@ class FactionsController < ApplicationController
   # PATCH/PUT /factions/1
   def update
     if @faction.update(faction_params)
-      redirect_to @faction, notice: 'Faction was successfully updated.'
+      respond_to do |f|
+        f.json do
+          render json: "Success"
+        end
+        f.html do
+          redirect_to @faction, notice: 'Faction was successfully updated.'
+        end
+      end
     else
       render :edit
     end

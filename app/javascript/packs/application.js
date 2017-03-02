@@ -12,6 +12,7 @@ const require_elm = (name) => { return require('../../assets/javascripts/elm/' +
 
 var Elm = merge(
   require_elm('Faction'),
+  require_elm('Category'),
   require_elm('Counter')
 );
 
