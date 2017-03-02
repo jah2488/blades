@@ -3,7 +3,7 @@ class FactionsController < ApplicationController
 
   # GET /factions
   def index
-    @factions = Faction.all
+    @factions = policy_scope(Faction)
   end
 
   # GET /factions/1

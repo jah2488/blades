@@ -5,7 +5,11 @@ class FactionPolicy < ApplicationPolicy
 
   class Scope < Scope
     def resolve
-      scope
+      if user && user.game
+        scope.where(game: user.game)
+      else
+        []
+      end
     end
   end
 end

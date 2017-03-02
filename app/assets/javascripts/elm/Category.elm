@@ -45,7 +45,10 @@ view : Model -> Html Msg
 view model =
     div [ class "faction" ]
         [ header [ class "category" ]
-            [ div [ class "name" ] [ text model.category.name ]
+            [ div [ class "name" ]
+                [ text model.category.name
+                , a [ class "icon", href <| "/categories/" ++ model.category.slug ] []
+                ]
             , div [ class "rep" ] [ text "Tier" ]
             , div [ class "hold" ] [ text "Hold" ]
             , div [ class "status" ] [ text "Status" ]
