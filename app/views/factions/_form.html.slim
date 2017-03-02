@@ -7,9 +7,6 @@
           li = message
 
   .field
-    = f.label :game
-    = f.text_field :game
-  .field
     = f.label :category_id
     = f.select :category_id, options_from_collection_for_select(Category.all, :id, :name)
   .field

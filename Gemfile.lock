@@ -103,6 +103,9 @@ GEM
     formatador (0.2.5)
     globalid (0.3.7)
       activesupport (>= 4.1.0)
+    glyphicons-rails (0.1.2)
+      sass (~> 3.3)
+      sass-rails
     guard (2.14.1)
       formatador (>= 0.2.4)
       listen (>= 2.7, < 4.0)
@@ -292,6 +295,7 @@ DEPENDENCIES
   dotenv-rails
   factory_girl_rails
   faker
+  glyphicons-rails (~> 0.1.2)
   guard-livereload (~> 2.5)
   guard-rspec
   jquery-rails

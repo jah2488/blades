@@ -1,6 +1,15 @@
 module ApplicationHelper
   require 'securerandom'
 
+  def elm(obj, config = {}, opts = { tag: 'div', id: SecureRandom.uuid })
+    name = obj.class.name
+    flags = config.merge({
+      "#{name.downcase}": obj,
+      editable: policy(obj).edit?
+    })
+    elm_view(name, flags: flags, **opts)
+  end
+
   def elm_view(name, flags: nil, tag: 'div', id: SecureRandom.uuid)
     content_for :elm do
       elm_embed(name, id, flags).html_safe

@@ -1,7 +1,5 @@
 h1 Listing districts
 
-= elm_view(:Bar, flags: @districts.first.attributes.merge(counter: 20))
-
 table
   thead
     tr
@@ -32,4 +30,5 @@ table
 
 br
 
-= link_to 'New District', new_district_path, class: 'btn-primary'
+= link_to_if policy(District).new?, 'New District', new_district_path, class: 'btn-primary' do
+  ' 

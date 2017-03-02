@@ -16,7 +16,10 @@
  *= require_self
  */
 
+@import 'glyphicons';
 @import 'clrs';
+
+$black: #333;
 
 @import url('https://fonts.googleapis.com/css?family=Crimson+Text');
 
@@ -56,12 +59,26 @@ nav ul li {
   background: white;
   border: 3px solid $black;
   margin: 1em 0em;
+
   .name {
     display: inline-block;
     width: 70%;
     font-family: Kirsty, Helvetica, Arial;
     font-size: 1.7em;
   }
+
+  .icon {
+    @extend %glyphicon-log-out;
+    text-decoration: none;
+    margin: 0 0.5em;
+    position: relative;
+    top: 2px;
+    font-size: 0.8em;
+    &:hover {
+      background: transparent;
+    }
+  }
+
   .rep, .hold, .status {
     display: inline-block;
     text-align: center;
@@ -139,6 +156,7 @@ div.actions {
 
 .editing {
   border: 4px solid $black;
+  margin: 1em 0;
   padding: 0 1em 1em 1em;
   transition: all 0.2s ease-out;
 }

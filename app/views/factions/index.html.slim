@@ -1,8 +1,8 @@
+
 h1 Listing factions
+= link_to 'New Faction', new_faction_path, class: 'btn-primary' if policy(Faction).new?
 
 - @factions.each do |faction|
-    = elm_view(:faction, flags: { faction: faction, expanded: false })
+  = elm(faction, expanded: true)
 
 br
-
-= link_to 'New Faction', new_faction_path, class: 'btn-primary'

@@ -12,6 +12,7 @@ end
 gem 'rails', '~> 5.1.0.beta1'
 gem 'webpacker', github: 'rails/webpacker'
 
+gem 'glyphicons-rails', '~> 0.1.2'
 gem 'clrs'
 
 # Use postgresql as the database for Active Record

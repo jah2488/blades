@@ -22,6 +22,7 @@ class FactionsController < ApplicationController
   # POST /factions
   def create
     @faction = Faction.new(faction_params)
+    @faction.game = current_user.game
 
     if @faction.save
       redirect_to @faction, notice: 'Faction was successfully created.'

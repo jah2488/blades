@@ -1,7 +1,7 @@
 h1 Listing categories
 
 - @categories.each do |category|
-  = elm_view('Category', flags: { category: category, factions: category.factions })
+  = elm(category, factions: category.factions)
 
 br
 
