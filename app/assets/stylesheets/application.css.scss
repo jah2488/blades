@@ -30,6 +30,12 @@ $black: #333;
 
 html, body, p, div, a {
   font-family: 'Crimson Text', serif;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  padding: 1em 0 2em 0;
 }
 
 h1, h2, h3, h4, h5 {
@@ -281,4 +287,66 @@ textarea {
       left: 10%;
     }
 	}
+}
+
+body:before, body:after {
+    content: "";
+    position: fixed;
+    background: $black;
+    left: 0;
+    right: 0;
+    height: 10px;
+    z-index: 1000000;
+}
+body:before {
+    top: 0;
+}
+body:after {
+    bottom: 0;
+}
+body {
+    border-left: 10px solid $black;
+    border-right: 10px solid $black;
+}
+
+@media (max-width: 600px){
+  html, body {
+    margin: 0;
+  }
+
+  body:before, body:after {
+      content: "";
+      position: fixed;
+      background: $black;
+      left: 0;
+      right: 0;
+      height: 5px;
+      z-index: 1000000;
+  }
+  body:before {
+      top: 0;
+  }
+  body:after {
+      bottom: 0;
+  }
+  body {
+      border-left: 5px solid $black;
+      border-right: 5px solid $black;
+  }
+
+
+
+  .container {
+    width: 90%;
+  }
+
+  .category, .information {
+    .name {
+      width: 63%;
+      font-size: 1.5em;
+    }
+    .rep, .hold, .status {
+      width: 12%;
+    }
+  }
 }
