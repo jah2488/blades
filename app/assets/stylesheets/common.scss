@@ -1,5 +1,4 @@
-@import 'clrs';
-$black: #333;
+@import 'colors';
 @import url('https://fonts.googleapis.com/css?family=Crimson+Text');
 
 @font-face {
@@ -46,4 +45,5 @@ body {
 
 h1, h2, h3, h4, h5 {
   font-family: Kirsty, Helvetica, Arial;
+  color: $black;
 }

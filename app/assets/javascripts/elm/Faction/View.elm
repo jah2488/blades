@@ -95,7 +95,7 @@ viewDescription faction expanded editMode =
             True ->
                 case editMode of
                     True ->
-                        div [ class "faction description" ]
+                        div [ class "description" ]
                             [ text "Description (markdown)"
                             , br [] []
                             , textarea [ onInput DescriptionChanged ] [ text <| Maybe.withDefault "Unknown" faction.description ]

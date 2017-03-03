@@ -16,11 +16,7 @@
  *= require_self
  */
 
-@import 'glyphicons';
-@import 'clrs';
-
-$black: #333;
-
+@import 'colors';
 @import 'common';
 @import 'nav';
 @import 'form';
@@ -37,8 +33,16 @@ $black: #333;
 
 .district {
   .stats {
-    .checked { margin: 1px; top: 2px; @extend %glyphicon-record; }
-    .unchecked { margin: 1px; @extend %glyphicon-unchecked; }
+    .checked {
+      margin: 1px;
+      top: 2px;
+      @extend %glyphicon-record;
+    }
+    .unchecked {
+      margin: 1px;
+      color: #555;
+      @extend %glyphicon-unchecked;
+    }
 
     margin-top: 0.5em;
     width: 95%;
