@@ -22,6 +22,16 @@ type Msg
     = NoOp
 
 
+renderMarkdown : Maybe String -> Html Msg
+renderMarkdown string =
+    case string of
+        Just desc ->
+            Markdown.toHtml [] desc
+
+        Nothing ->
+            text "Unknown"
+
+
 toSlug : String -> String
 toSlug name =
     String.toLower name
@@ -119,44 +129,53 @@ viewDistrict district =
         ]
 
 
+factionSection : District -> Html Msg
+factionSection district =
+    div [ class "row" ]
+        [ div [ class "faction" ]
+            [ header [ class "category" ]
+                [ div [ class "name" ]
+                    [ text "Factions"
+                    ]
+                , div [ class "rep" ] [ text "Tier" ]
+                , div [ class "hold" ] [ text "Hold" ]
+                , div [ class "status" ] [ text "Status" ]
+                ]
+            , div [] (List.map viewFaction district.factions)
+            ]
+        ]
+
+
+statsSection : District -> Html Msg
+statsSection district =
+    div [ class "row" ] [ viewDistrict district ]
+
+
+sideBar : District -> Html Msg
+sideBar district =
+    div [ class "six columns" ]
+        [ statsSection district
+        , factionSection district
+        ]
+
+
+mainSection : Html Msg -> Html Msg
+mainSection desc =
+    div [ class "six columns" ]
+        [ div [ class "description" ] [ desc ] ]
+
+
 view : Model -> Html Msg
 view model =
-    let
-        description =
-            case model.district.description of
-                Just desc ->
-                    Markdown.toHtml [] desc
-
-                Nothing ->
-                    text "Unknown"
-    in
-        section [ class "district" ]
-            [ div []
-                [ header [ class "category" ]
-                    [ div [ class "name" ] [ text model.district.name ]
-                    ]
-                , div [ class "row" ]
-                    [ div [ class "six columns" ]
-                        [ div [ class "description" ] [ description ] ]
-                    , div [ class "six columns" ]
-                        [ div [ class "row" ] [ viewDistrict model.district ]
-                        , div [ class "row" ]
-                            [ div [ class "faction" ]
-                                [ header [ class "category" ]
-                                    [ div [ class "name" ]
-                                        [ text "Factions"
-                                        ]
-                                    , div [ class "rep" ] [ text "Tier" ]
-                                    , div [ class "hold" ] [ text "Hold" ]
-                                    , div [ class "status" ] [ text "Status" ]
-                                    ]
-                                , div [] (List.map viewFaction model.district.factions)
-                                ]
-                            ]
-                        ]
-                    ]
+    section [ class "district" ]
+        [ div []
+            [ header [ class "category" ] [ div [ class "name" ] [ text model.district.name ] ]
+            , div [ class "row" ]
+                [ mainSection (renderMarkdown model.district.description)
+                , sideBar model.district
                 ]
             ]
+        ]
 
 
 init : Flags -> ( Model, Cmd Msg )
