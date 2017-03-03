@@ -2,6 +2,7 @@ module District exposing (..)
 
 import Html exposing (Html, a, button, div, header, section, td, text, tr)
 import Html.Attributes exposing (class, href)
+import Regex exposing (regex)
 import Markdown
 import Models exposing (..)
 import Faction.View exposing (tier)
@@ -19,6 +20,36 @@ type alias Model =
 
 type Msg
     = NoOp
+
+
+toSlug : String -> String
+toSlug name =
+    String.toLower name
+        |> Regex.replace Regex.All
+            (regex "[ _&.']")
+            (\{ match } ->
+                case match of
+                    " " ->
+                        "-"
+
+                    "_" ->
+                        "-"
+
+                    "&" ->
+                        ""
+
+                    "." ->
+                        ""
+
+                    "'" ->
+                        ""
+
+                    _ ->
+                        ""
+            )
+        |> Regex.replace Regex.All
+            (regex "--")
+            (\_ -> "-")
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -40,48 +71,39 @@ viewFaction faction =
         ]
 
 
+isChecked : Int -> Int -> String
+isChecked idx n =
+    if idx <= n then
+        "unchecked"
+    else
+        "checked"
+
+
+toCheckbox : String -> Html Msg
+toCheckbox className =
+    div [ class className ] []
+
+
 toRating : Int -> List (Html Msg)
 toRating n =
-    case n of
-        0 ->
-            [ div [ class "unchecked" ] []
-            , div [ class "unchecked" ] []
-            , div [ class "unchecked" ] []
-            , div [ class "unchecked" ] []
-            , div [ class "amount" ] [ text <| toString n ]
-            ]
+    let
+        amount =
+            div [ class "amount" ] [ text <| toString n ]
 
-        1 ->
-            [ div [ class "checked" ] []
-            , div [ class "unchecked" ] []
-            , div [ class "unchecked" ] []
-            , div [ class "unchecked" ] []
-            , div [ class "amount" ] [ text <| toString n ]
-            ]
+        checkboxes =
+            List.range 0 3
+                |> List.map (isChecked n)
+                |> List.map toCheckbox
+    in
+        checkboxes ++ [ amount ]
 
-        2 ->
-            [ div [ class "checked" ] []
-            , div [ class "checked" ] []
-            , div [ class "unchecked" ] []
-            , div [ class "unchecked" ] []
-            , div [ class "amount" ] [ text <| toString n ]
-            ]
 
-        3 ->
-            [ div [ class "checked" ] []
-            , div [ class "checked" ] []
-            , div [ class "checked" ] []
-            , div [ class "unchecked" ] []
-            , div [ class "amount" ] [ text <| toString n ]
-            ]
-
-        _ ->
-            [ div [ class "checked" ] []
-            , div [ class "checked" ] []
-            , div [ class "checked" ] []
-            , div [ class "checked" ] []
-            , div [ class "amount" ] [ text <| toString n ]
-            ]
+viewStat : String -> Int -> Html Msg
+viewStat name value =
+    div [ class <| "attr " ++ toSlug name ]
+        [ div [ class "name" ] [ text name ]
+        , div [ class "value" ] <| toRating value
+        ]
 
 
 viewDistrict : District -> Html Msg
@@ -90,22 +112,10 @@ viewDistrict district =
         [ header [ class "category" ]
             [ div [ class "name" ] [ text "Info" ]
             ]
-        , div [ class "attr wealth" ]
-            [ div [ class "name" ] [ text "Wealth" ]
-            , div [ class "value" ] <| toRating district.wealth
-            ]
-        , div [ class "attr security-safety" ]
-            [ div [ class "name" ] [ text "Security and Safety" ]
-            , div [ class "value" ] <| toRating district.security_and_safety
-            ]
-        , div [ class "attr criminal-influence" ]
-            [ div [ class "name" ] [ text "Criminal Influence" ]
-            , div [ class "value" ] <| toRating district.criminal_influence
-            ]
-        , div [ class "attr occult-influence" ]
-            [ div [ class "name" ] [ text "Occult Influence" ]
-            , div [ class "value" ] <| toRating district.occult_influence
-            ]
+        , viewStat "Wealth" district.wealth
+        , viewStat "Security & Safety" district.security_and_safety
+        , viewStat "Criminal Influence" district.criminal_influence
+        , viewStat "Occult Influence" district.occult_influence
         ]
 
 
