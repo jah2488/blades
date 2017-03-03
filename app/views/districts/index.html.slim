@@ -1,34 +1,9 @@
 h1 Listing districts
 
-table
-  thead
-    tr
-      th Game
-      th Name
-      th Description
-      th Wealth
-      th Security and safety
-      th Criminal influence
-      th Occult influence
-      th
-      th
-      th
-
-  tbody
-    - @districts.each do |district|
-      tr
-        td = district.game
-        td = district.name
-        td = district.description
-        td = district.wealth
-        td = district.security_and_safety
-        td = district.criminal_influence
-        td = district.occult_influence
-        td = link_to 'Show', district
-        td = link_to 'Edit', edit_district_path(district)
-        td = link_to 'Destroy', district, data: { confirm: 'Are you sure?' }, method: :delete
-
-br
-
 = link_to_if policy(District).new?, 'New District', new_district_path, class: 'btn-primary' do
-  ' 
+  '
+
+- @districts.each do |district|
+  = elm(district, expanded: true)
+br
+ 

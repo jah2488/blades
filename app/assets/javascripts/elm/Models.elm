@@ -58,3 +58,38 @@ nullFaction =
     , game = nullGame
     , category = Nothing
     }
+
+
+type alias Character =
+    {}
+
+
+type alias District =
+    { id : Int
+    , game_id : Int
+    , name : String
+    , description : Maybe String
+    , wealth : Int
+    , security_and_safety : Int
+    , criminal_influence : Int
+    , occult_influence : Int
+    , slug : String
+    , factions : List Faction
+    , characters : List Character
+    }
+
+
+nullDistrict : District
+nullDistrict =
+    { id = 0
+    , game_id = 0
+    , name = "Unkown District"
+    , description = Nothing
+    , wealth = 0
+    , security_and_safety = 0
+    , criminal_influence = 0
+    , occult_influence = 0
+    , slug = "unknown-district"
+    , factions = []
+    , characters = []
+    }

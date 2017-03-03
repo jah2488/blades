@@ -22,6 +22,7 @@ class DistrictsController < ApplicationController
   # POST /districts
   def create
     @district = District.new(district_params)
+    @district.game = current_user.game
 
     if @district.save
       redirect_to @district, notice: 'District was successfully created.'
@@ -53,6 +54,6 @@ class DistrictsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def district_params
-      params.require(:district).permit(:game_id, :name, :description, :wealth, :security_and_safety, :criminal_influence, :occult_influence, :faction_ids)
+      params.require(:district).permit(:game_id, :name, :description, :faction_ids, :wealth, :security_and_safety, :criminal_influence, :occult_influence, faction_ids: [])
     end
 end

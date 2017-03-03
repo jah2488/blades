@@ -6,4 +6,11 @@ class District < ApplicationRecord
 
   has_many :district_characters
   has_many :characters, through: :district_characters
+
+  def as_json(*)
+    super.merge({
+      factions: factions,
+      characters: characters
+    })
+  end
 end
