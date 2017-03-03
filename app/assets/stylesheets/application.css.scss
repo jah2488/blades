@@ -28,6 +28,10 @@ $black: #333;
   src: font-url('Kirsty.ttf') format('truetype');
 }
 
+html, body {
+  height: 100%;
+}
+
 html, body, p, div, a {
   font-family: 'Crimson Text', serif;
   margin: 0;
@@ -312,6 +316,7 @@ body {
 @media (max-width: 600px){
   html, body {
     margin: 0;
+    height: 100%;
   }
 
   body:before, body:after {
