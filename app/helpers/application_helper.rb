@@ -22,7 +22,7 @@ module ApplicationHelper
   private
 
   def elm_embed(name, id, flags)
-    "elmEmbed('#{name.to_s.titleize}', '#{id}', #{as_json(flags)});\n"
+    "elmEmbed('#{name.to_s.titleize}', '#{id}', #{as_json(flags)});"
   end
 
   def as_json(flags)
