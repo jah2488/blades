@@ -1,7 +1,8 @@
 module District.View exposing (..)
 
 import Html exposing (Html, a, button, div, header, section, td, text, tr)
-import Html.Attributes exposing (class, href)
+import Html.Attributes exposing (class, classList, href)
+import Html.Events exposing (onClick)
 import Regex exposing (regex)
 import Markdown
 import Models exposing (..)
@@ -96,53 +97,82 @@ viewStat name value =
         ]
 
 
-viewDistrict : District -> Html Msg
-viewDistrict district =
-    div [ class "stats" ]
-        [ header [ class "category" ]
-            [ div [ class "name" ] [ text "Info" ]
-            ]
-        , viewStat "Wealth" district.wealth
-        , viewStat "Security & Safety" district.security_and_safety
-        , viewStat "Criminal Influence" district.criminal_influence
-        , viewStat "Occult Influence" district.occult_influence
-        ]
+stateClass : Bool -> String
+stateClass state =
+    case state of
+        True ->
+            "ic expanded"
+
+        False ->
+            "ic closed"
 
 
-factionSection : District -> Html Msg
-factionSection district =
+viewDistrict : District -> Bool -> Html Msg
+viewDistrict district opened =
+    let
+        heading =
+            header [ class "category" ]
+                [ div [ class (stateClass opened), onClick ToggleStats ] []
+                , div [ class "name" ] [ text "Info" ]
+                ]
+
+        body =
+            if opened == True then
+                [ viewStat "Wealth" district.wealth
+                , viewStat "Security & Safety" district.security_and_safety
+                , viewStat "Criminal Influence" district.criminal_influence
+                , viewStat "Occult Influence" district.occult_influence
+                ]
+            else
+                []
+    in
+        div [ class "stats" ] (heading :: body)
+
+
+factionSection : Model -> Html Msg
+factionSection { district, factionsOpen } =
     div [ class "row" ]
         [ div [ class "faction" ]
             [ header [ class "category" ]
-                [ div [ class "name" ]
+                [ div [ class (stateClass factionsOpen), onClick ToggleFactions ] []
+                , div [ class "name" ]
                     [ text "Factions"
                     ]
                 , div [ class "rep" ] [ text "Tier" ]
                 , div [ class "hold" ] [ text "Hold" ]
                 , div [ class "status" ] [ text "Status" ]
                 ]
-            , div [] (List.map viewFaction district.factions)
+            , div []
+                [ if factionsOpen then
+                    div [] (List.map viewFaction district.factions)
+                  else
+                    div [] []
+                ]
             ]
         ]
 
 
-statsSection : District -> Html Msg
-statsSection district =
-    div [ class "row" ] [ viewDistrict district ]
+statsSection : Model -> Html Msg
+statsSection model =
+    div [ class "row" ] [ viewDistrict model.district model.statsOpen ]
 
 
-sideBar : District -> Html Msg
-sideBar district =
+sideBar : Model -> Html Msg
+sideBar model =
     div [ class "six columns" ]
-        [ statsSection district
-        , factionSection district
+        [ statsSection model
+        , factionSection model
         ]
 
 
-mainSection : Html Msg -> Html Msg
-mainSection desc =
+mainSection : Html Msg -> Bool -> Html Msg
+mainSection desc opened =
     div [ class "six columns" ]
-        [ div [ class "description" ] [ desc ] ]
+        [ div [ classList [ ( "description", True ), ( "opened", opened ) ] ]
+            [ desc
+            , div [ class <| "fixed-footer " ++ (stateClass opened), onClick ToggleDescription ] []
+            ]
+        ]
 
 
 view : Model -> Html Msg
@@ -151,8 +181,8 @@ view model =
         [ div []
             [ header [ class "category" ] [ div [ class "name" ] [ text model.district.name ] ]
             , div [ class "row" ]
-                [ mainSection (renderMarkdown model.district.description)
-                , sideBar model.district
+                [ mainSection (renderMarkdown model.district.description) model.descriptionOpen
+                , sideBar model
                 ]
             ]
         ]

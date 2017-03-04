@@ -10,8 +10,14 @@ type alias Flags =
 
 type alias Model =
     { district : District
+    , factionsOpen : Bool
+    , statsOpen : Bool
+    , descriptionOpen : Bool
     }
 
 
 type Msg
     = NoOp
+    | ToggleStats
+    | ToggleFactions
+    | ToggleDescription
