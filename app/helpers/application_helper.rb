@@ -2,6 +2,7 @@ module ApplicationHelper
   require 'securerandom'
 
   def elm(obj, config = {}, opts = { tag: 'div', id: SecureRandom.uuid })
+    return "Cannot render an elm view for NilClass" if obj.nil?
     name = obj.class.name
     flags = config.merge({
       "#{name.downcase}": obj,

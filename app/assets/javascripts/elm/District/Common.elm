@@ -13,11 +13,16 @@ type alias Model =
     , factionsOpen : Bool
     , statsOpen : Bool
     , descriptionOpen : Bool
+    , editing : Bool
+    , editable : Bool
     }
 
 
 type Msg
     = NoOp
+    | EnterEdit
+    | ExitEdit
     | ToggleStats
     | ToggleFactions
     | ToggleDescription
+    | DescriptionChanged String

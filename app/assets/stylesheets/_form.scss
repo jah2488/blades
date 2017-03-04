@@ -1,0 +1,25 @@
+@import 'colors';
+
+input[type="number"],
+input[type="number"]:focus,
+input[type="text"],
+input[type="text"]:focus,
+select,
+select:focus,
+textarea,
+textarea:focus {
+    border: 3px solid $black;
+    border-radius: 0;
+}
+
+.edit {
+    height: 98%;
+}
+
+textarea {
+    width: 100%;
+    min-height: 150px;
+    height: 100%;
+    margin: 0.1em 0 0;
+    resize: none;
+}

@@ -11,7 +11,9 @@ init { district } =
     ( { district = district
       , descriptionOpen = True
       , factionsOpen = True
-      , statsOpen = False
+      , statsOpen = True
+      , editing = False
+      , editable = True
       }
     , Cmd.none
     )

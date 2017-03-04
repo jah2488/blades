@@ -1,8 +1,8 @@
 module District.View exposing (..)
 
-import Html exposing (Html, a, button, div, header, section, td, text, tr)
+import Html exposing (Html, a, button, div, header, section, td, text, tr, br, textarea)
 import Html.Attributes exposing (class, classList, href)
-import Html.Events exposing (onClick)
+import Html.Events exposing (onClick, onInput)
 import Models exposing (..)
 import Faction.Utils exposing (tier)
 import District.Common exposing (..)
@@ -113,27 +113,59 @@ sideBar model =
     div [ class "six columns" ]
         [ statsSection model
         , factionSection model
+        , viewEdit model.editable model.editing
         ]
 
 
-mainSection : Html Msg -> Bool -> Html Msg
-mainSection desc opened =
+mainSection : Model -> Html Msg
+mainSection model =
     div [ class "six columns" ]
-        [ div [ classList [ ( "description", True ), ( "opened", opened ) ] ]
-            [ desc
-            , div [ class <| "fixed-footer " ++ (stateClass opened), onClick ToggleDescription ] []
+        [ div [ classList [ ( "description", True ), ( "opened", model.descriptionOpen ) ] ]
+            [ viewDescription model
+            , div [ class <| "fixed-footer " ++ (stateClass model.descriptionOpen), onClick ToggleDescription ] []
             ]
         ]
+
+
+viewDescription : Model -> Html Msg
+viewDescription model =
+    case model.editing of
+        True ->
+            div [ class "edit" ]
+                [ text "Description (markdown)"
+                , br [] []
+                , textarea [ onInput DescriptionChanged ]
+                    [ text <| Maybe.withDefault "Unknown" model.district.description ]
+                ]
+
+        False ->
+            (renderMarkdown model.district.description NoOp)
 
 
 view : Model -> Html Msg
 view model =
     section [ class "district" ]
         [ div []
-            [ header [ class "category" ] [ div [ class "name" ] [ text model.district.name ] ]
+            [ header [ class "category" ]
+                [ div [ class "name" ]
+                    [ text model.district.name
+                    , a [ class "icon", href <| "/districts/" ++ model.district.slug ] []
+                    ]
+                ]
             , div [ class "row" ]
-                [ mainSection (renderMarkdown model.district.description NoOp) model.descriptionOpen
+                [ mainSection model
                 , sideBar model
                 ]
             ]
         ]
+
+
+viewEdit : Bool -> Bool -> Html Msg
+viewEdit editable editMode =
+    if editable == True then
+        if editMode == True then
+            a [ class "btn-primary", onClick ExitEdit ] [ text "Save Changes" ]
+        else
+            a [ class "btn-primary", onClick EnterEdit ] [ text "Edit" ]
+    else
+        div [] []

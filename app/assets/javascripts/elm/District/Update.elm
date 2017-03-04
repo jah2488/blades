@@ -23,5 +23,21 @@ update msg model =
         ToggleStats ->
             ( { model | statsOpen = toggleAttr model.statsOpen }, Cmd.none )
 
+        EnterEdit ->
+            ( { model | editing = True }, Cmd.none )
+
+        ExitEdit ->
+            ( { model | editing = False }, Cmd.none )
+
+        DescriptionChanged desc ->
+            let
+                district =
+                    model.district
+
+                newDistrict =
+                    { district | description = Just desc }
+            in
+                ( { model | district = newDistrict }, Cmd.none )
+
         NoOp ->
             ( model, Cmd.none )

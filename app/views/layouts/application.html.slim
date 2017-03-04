@@ -18,12 +18,12 @@ html
         - if signed_in?
           li = link_to "Factions", categories_path
           li = link_to "Districts", districts_path
-          li = link_to "Characters", characters_path
-          li = link_to "Players", players_path
-          li = button_to 'Sign out', sign_out_path, method: :delete
-          li = "Signed in as: #{current_user.email}"
+          / li = link_to "Characters", characters_path
+          / li = link_to "Players", players_path
+          li = button_to 'Sign out', sign_out_path, class: 'btn-primary', method: :delete
+          / li = "Signed in as: #{current_user.email}"
         - else
-          li = link_to 'Sign in', sign_in_path      
+          li = link_to 'Sign in', sign_in_path, class: 'btn-primary'    
 
 
     - flash.each do |key, value|
