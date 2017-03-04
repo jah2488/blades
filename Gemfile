@@ -47,6 +47,10 @@ gem 'slim-rails'
 gem 'faker'
 gem 'pundit'
 
+gem 'scout_apm'
+gem 'rollbar'
+
+
 group :development, :test do
   gem 'dotenv-rails'
   gem 'pry-rails'

@@ -214,6 +214,8 @@ GEM
       execjs
       railties (>= 3.2)
       tilt
+    rollbar (2.14.0)
+      multi_json
     rspec (3.5.0)
       rspec-core (~> 3.5.0)
       rspec-expectations (~> 3.5.0)
@@ -242,6 +244,7 @@ GEM
       sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
       tilt (>= 1.1, < 3)
+    scout_apm (2.1.22)
     shellany (0.0.1)
     simplecov (0.13.0)
       docile (~> 1.1.0)
@@ -310,8 +313,10 @@ DEPENDENCIES
   rails_12factor
   rake
   react-rails
+  rollbar
   rspec-rails
   sass-rails (~> 5.0)
+  scout_apm
   simplecov
   slim-rails
   timecop
