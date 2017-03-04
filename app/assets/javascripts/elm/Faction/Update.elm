@@ -51,6 +51,9 @@ patch model url body decoder =
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
+        NoOp ->
+            ( model, Cmd.none )
+
         ShowTools ->
             ( model, Cmd.none )
 

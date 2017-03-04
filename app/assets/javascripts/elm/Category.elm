@@ -3,7 +3,7 @@ module Category exposing (..)
 import Models exposing (..)
 import Html exposing (Html, a, button, div, header, td, text, tr)
 import Html.Attributes exposing (class, href)
-import Faction.View exposing (tier)
+import Faction.Utils exposing (tier)
 
 
 type alias Flags =

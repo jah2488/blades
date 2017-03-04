@@ -34,6 +34,7 @@ nullModel =
 
 type Msg
     = ShowTools
+    | NoOp
     | EnterEdit
     | ExitEdit
     | HoldChanged Bool

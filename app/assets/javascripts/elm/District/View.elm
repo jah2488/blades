@@ -3,71 +3,10 @@ module District.View exposing (..)
 import Html exposing (Html, a, button, div, header, section, td, text, tr)
 import Html.Attributes exposing (class, classList, href)
 import Html.Events exposing (onClick)
-import Regex exposing (regex)
-import Markdown
 import Models exposing (..)
-import Faction.View exposing (tier)
+import Faction.Utils exposing (tier)
 import District.Common exposing (..)
-
-
-renderMarkdown : Maybe String -> Html Msg
-renderMarkdown string =
-    case string of
-        Just desc ->
-            Markdown.toHtml [] desc
-
-        Nothing ->
-            text "Unknown"
-
-
-toSlug : String -> String
-toSlug name =
-    String.toLower name
-        |> Regex.replace Regex.All
-            (regex "[ _&.']")
-            (\{ match } ->
-                case match of
-                    " " ->
-                        "-"
-
-                    "_" ->
-                        "-"
-
-                    "&" ->
-                        ""
-
-                    "." ->
-                        ""
-
-                    "'" ->
-                        ""
-
-                    _ ->
-                        ""
-            )
-        |> Regex.replace Regex.All
-            (regex "--")
-            (\_ -> "-")
-
-
-viewFaction : Faction -> Html Msg
-viewFaction faction =
-    div [ class "information" ]
-        [ div [ class "name" ]
-            [ a [ href <| "/factions/" ++ faction.slug ] [ text faction.name ]
-            ]
-        , div [ class "rep" ] [ text <| tier faction.reputation ]
-        , div [ class "hold" ] [ text <| toString faction.hold ]
-        , div [ class "status" ] [ text <| toString faction.faction_status ]
-        ]
-
-
-isChecked : Int -> Int -> String
-isChecked idx n =
-    if idx <= n then
-        "unchecked"
-    else
-        "checked"
+import Utils exposing (..)
 
 
 toCheckbox : String -> Html Msg
@@ -129,6 +68,18 @@ viewDistrict district opened =
         div [ class "stats" ] (heading :: body)
 
 
+viewFaction : Faction -> Html Msg
+viewFaction faction =
+    div [ class "information" ]
+        [ div [ class "name" ]
+            [ a [ href <| "/factions/" ++ faction.slug ] [ text faction.name ]
+            ]
+        , div [ class "rep" ] [ text <| tier faction.reputation ]
+          -- , div [ class "hold" ] [ text <| toString faction.hold ]
+        , div [ class "status" ] [ text <| toString faction.faction_status ]
+        ]
+
+
 factionSection : Model -> Html Msg
 factionSection { district, factionsOpen } =
     div [ class "row" ]
@@ -139,7 +90,7 @@ factionSection { district, factionsOpen } =
                     [ text "Factions"
                     ]
                 , div [ class "rep" ] [ text "Tier" ]
-                , div [ class "hold" ] [ text "Hold" ]
+                  -- , div [ class "hold" ] [ text "Hold" ]
                 , div [ class "status" ] [ text "Status" ]
                 ]
             , div []
@@ -181,7 +132,7 @@ view model =
         [ div []
             [ header [ class "category" ] [ div [ class "name" ] [ text model.district.name ] ]
             , div [ class "row" ]
-                [ mainSection (renderMarkdown model.district.description) model.descriptionOpen
+                [ mainSection (renderMarkdown model.district.description NoOp) model.descriptionOpen
                 , sideBar model
                 ]
             ]

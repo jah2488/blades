@@ -55,8 +55,30 @@
 }
 
 .district {
-    .faction .name {
-        width: 60%;
+    .faction {
+        .category {
+            .name {
+                width: 67%;
+            }
+
+            .hold,
+            .rep,
+            .status {
+                width: 13%;
+            }
+        }
+
+        .information {
+            .name {
+                width: 74%;
+            }
+
+            .hold,
+            .rep,
+            .status {
+                width: 12%;
+            }
+        }
     }
 
     .stats {
