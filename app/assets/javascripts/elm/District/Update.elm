@@ -29,6 +29,46 @@ update msg model =
         ExitEdit ->
             ( { model | editing = False }, Cmd.none )
 
+        WealthChanged int ->
+            let
+                district =
+                    model.district
+
+                newDistrict =
+                    { district | wealth = int }
+            in
+                ( { model | district = newDistrict }, Cmd.none )
+
+        SecurityAndSafetyChanged int ->
+            let
+                district =
+                    model.district
+
+                newDistrict =
+                    { district | security_and_safety = int }
+            in
+                ( { model | district = newDistrict }, Cmd.none )
+
+        CriminalInfluenceChanged int ->
+            let
+                district =
+                    model.district
+
+                newDistrict =
+                    { district | criminal_influence = int }
+            in
+                ( { model | district = newDistrict }, Cmd.none )
+
+        OccultInfluenceChanged int ->
+            let
+                district =
+                    model.district
+
+                newDistrict =
+                    { district | occult_influence = int }
+            in
+                ( { model | district = newDistrict }, Cmd.none )
+
         DescriptionChanged desc ->
             let
                 district =

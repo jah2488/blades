@@ -26,3 +26,7 @@ type Msg
     | ToggleFactions
     | ToggleDescription
     | DescriptionChanged String
+    | WealthChanged Int
+    | SecurityAndSafetyChanged Int
+    | CriminalInfluenceChanged Int
+    | OccultInfluenceChanged Int

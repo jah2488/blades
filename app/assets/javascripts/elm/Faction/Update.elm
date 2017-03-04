@@ -63,6 +63,9 @@ update msg model =
         ExitEdit ->
             ( { model | editMode = False }, saveChanges model )
 
+        CancelEdit ->
+            ( { model | editMode = False }, Cmd.none )
+
         SavedForm (Ok status) ->
             ( model, Cmd.none )
 

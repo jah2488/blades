@@ -32,14 +32,12 @@ categorySlug model =
 
 viewWrapper : Model -> List (Html Msg) -> Html Msg
 viewWrapper model body =
-    section
-        [ classList [ ( "editing", model.editMode ) ]
-        ]
+    section [ classList [ ( "editing", model.editMode ) ] ] <|
         [ div [ class "faction" ]
             [ viewHeader model, div [ class "information" ] body ]
         , viewDescription model.faction model.expanded model.editMode
-        , viewEdit model.editable model.editMode
         ]
+            ++ viewEdit model.editable model.editMode
 
 
 viewHeader : Model -> Html Msg
@@ -143,12 +141,14 @@ viewAttr editable name content =
         div [ class name ] [ content ]
 
 
-viewEdit : Bool -> Bool -> Html Msg
+viewEdit : Bool -> Bool -> List (Html Msg)
 viewEdit editable editMode =
     if editable == True then
         if editMode == True then
-            a [ class "btn-primary", onClick ExitEdit ] [ text "Save Changes" ]
+            [ a [ class "btn-primary", onClick CancelEdit ] [ text "Cancel" ]
+            , a [ class "btn-primary", onClick ExitEdit ] [ text "Save Changes" ]
+            ]
         else
-            a [ class "btn-primary", onClick EnterEdit ] [ text "Edit" ]
+            [ a [ class "btn-primary", onClick EnterEdit ] [ text "Edit" ] ]
     else
-        span [] []
+        [ span [] [] ]

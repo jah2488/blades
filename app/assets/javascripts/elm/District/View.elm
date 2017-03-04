@@ -1,7 +1,7 @@
 module District.View exposing (..)
 
-import Html exposing (Html, a, button, div, header, section, td, text, tr, br, textarea)
-import Html.Attributes exposing (class, classList, href)
+import Html exposing (Html, a, button, div, header, section, td, text, tr, br, textarea, input)
+import Html.Attributes exposing (class, classList, href, type_)
 import Html.Events exposing (onClick, onInput)
 import Models exposing (..)
 import Faction.Utils exposing (tier)
@@ -28,12 +28,66 @@ toRating n =
         checkboxes ++ [ amount ]
 
 
-viewStat : String -> Int -> Html Msg
-viewStat name value =
-    div [ class <| "attr " ++ toSlug name ]
-        [ div [ class "name" ] [ text name ]
-        , div [ class "value" ] <| toRating value
-        ]
+inRating : Int -> Int -> String
+inRating idx n =
+    let
+        modifier =
+            if idx < n then
+                ""
+            else
+                "current"
+
+        statNum =
+            case n of
+                0 ->
+                    "-zero"
+
+                1 ->
+                    "-one"
+
+                2 ->
+                    "-two"
+
+                3 ->
+                    "-three"
+
+                _ ->
+                    "-four"
+    in
+        "stat" ++ statNum ++ " " ++ modifier
+
+
+toStatBox : (Int -> Msg) -> Int -> String -> Html Msg
+toStatBox msg idx classNames =
+    div [ class classNames, onClick (msg idx) ] []
+
+
+ratingSelect : Int -> (Int -> Msg) -> List (Html Msg)
+ratingSelect n msg =
+    List.range 0 4
+        |> List.map (inRating n)
+        |> List.indexedMap (toStatBox msg)
+
+
+viewStat : String -> Int -> Bool -> (Int -> Msg) -> Html Msg
+viewStat name attrValue editing msg =
+    let
+        body =
+            if editing == True then
+                div [ class "value" ] <| ratingSelect attrValue msg
+            else
+                div [ class "value" ] <| toRating attrValue
+    in
+        div
+            [ classList
+                [ ( "attr", True )
+                , ( toSlug name, True )
+                , ( "editing", editing )
+                ]
+            ]
+            [ div [ class "name" ] [ text name ]
+            , body
+            ]
 
 
 stateClass : Bool -> String
@@ -46,9 +100,15 @@ stateClass state =
             "ic closed"
 
 
-viewDistrict : District -> Bool -> Html Msg
-viewDistrict district opened =
+viewDistrict : Model -> Html Msg
+viewDistrict model =
     let
+        opened =
+            model.statsOpen
+
+        district =
+            model.district
+
         heading =
             header [ class "category" ]
                 [ div [ class (stateClass opened), onClick ToggleStats ] []
@@ -57,10 +117,10 @@ viewDistrict district opened =
 
         body =
             if opened == True then
-                [ viewStat "Wealth" district.wealth
-                , viewStat "Security & Safety" district.security_and_safety
-                , viewStat "Criminal Influence" district.criminal_influence
-                , viewStat "Occult Influence" district.occult_influence
+                [ viewStat "Wealth" district.wealth model.editing WealthChanged
+                , viewStat "Security & Safety" district.security_and_safety model.editing SecurityAndSafetyChanged
+                , viewStat "Criminal Influence" district.criminal_influence model.editing CriminalInfluenceChanged
+                , viewStat "Occult Influence" district.occult_influence model.editing OccultInfluenceChanged
                 ]
             else
                 []
@@ -105,7 +165,7 @@ factionSection { district, factionsOpen } =
 
 statsSection : Model -> Html Msg
 statsSection model =
-    div [ class "row" ] [ viewDistrict model.district model.statsOpen ]
+    div [ class "row" ] [ viewDistrict model ]
 
 
 sideBar : Model -> Html Msg

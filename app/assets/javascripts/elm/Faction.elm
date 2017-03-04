@@ -12,7 +12,7 @@ init flags =
       , expanded = flags.expanded
       , editable = flags.editable
       , editMode = False
-      , csrfToken = flags.csrfToken
+      , csrfToken = flags.csrfToken_
       }
     , Cmd.none
     )

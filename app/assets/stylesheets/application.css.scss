@@ -103,6 +103,18 @@
 
         .attr {
             padding: 0.9em;
+
+            &.editing {
+                margin: 0;
+
+                .name {
+                    width: 50%;
+                }
+
+                .value {
+                    width: 45%;
+                }
+            }
         }
 
         .name {
@@ -112,7 +124,7 @@
 
         .value {
             font-size: 1.3em;
-            width: 30%;
+            width: 35%;
             display: inline-block;
             margin: 0 0.25em;
         }
@@ -211,7 +223,7 @@
         }
     }
 
-    .description {
+    &.description {
         padding: 1em;
         font-family: 'Crimson Text', serif;
         font-size: 1.2em;

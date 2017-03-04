@@ -23,3 +23,66 @@ textarea {
     margin: 0.1em 0 0;
     resize: none;
 }
+
+.description .edit textarea {
+    width: 96%;
+}
+
+.stat-four,
+.stat-one,
+.stat-three,
+.stat-two,
+.stat-zero {
+    cursor: pointer;
+    vertical-align: bottom;
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    border: 2px solid $black;
+    margin-left: 0.15em;
+    padding: 0.25em;
+
+    &.current {
+        background: $silver;
+    }
+
+    &:after {
+        position: relative;
+        top: -2px;
+        left: 3px;
+    }
+
+    &:hover {
+        background: $gray;
+    }
+}
+
+.stat-zero {
+    &:after {
+        content: '0';
+    }
+}
+
+.stat-one {
+    &:after {
+        content: '1';
+    }
+}
+
+.stat-two {
+    &:after {
+        content: '2';
+    }
+}
+
+.stat-three {
+    &:after {
+        content: '3';
+    }
+}
+
+.stat-four {
+    &:after {
+        content: '4';
+    }
+}

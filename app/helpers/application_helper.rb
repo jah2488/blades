@@ -28,6 +28,9 @@ module ApplicationHelper
   def as_json(flags)
     return 'undefined' if flags.nil?
     return flags if flags.is_a?(String)
-    flags.merge(csrfToken: form_authenticity_token).to_json
+    flags.merge({
+      csrfToken_: form_authenticity_token,
+      currentUrl_: request.fullpath
+    }).to_json
   end
 end

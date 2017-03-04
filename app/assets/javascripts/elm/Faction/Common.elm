@@ -1,7 +1,6 @@
 module Faction.Common exposing (..)
 
 import Http
-import Maybe
 import Models exposing (..)
 
 
@@ -9,7 +8,7 @@ type alias Flags =
     { faction : Faction
     , expanded : Bool
     , editable : Bool
-    , csrfToken : String
+    , csrfToken_ : String
     }
 
 
@@ -37,6 +36,7 @@ type Msg
     | NoOp
     | EnterEdit
     | ExitEdit
+    | CancelEdit
     | HoldChanged Bool
     | RepChanged String
     | StatusChanged String
