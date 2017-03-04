@@ -20,6 +20,10 @@
 @import 'nav';
 @import 'form';
 @import 'buttons';
+@font-face {
+    font-family: 'Glyphicons Halflings';
+    src: url("https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/fonts/glyphicons-halflings-regular.ttf");
+}
 
 .editing .faction .information .name {
     margin-top: 10px;
