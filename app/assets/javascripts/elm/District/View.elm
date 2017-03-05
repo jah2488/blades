@@ -140,27 +140,63 @@ viewFaction faction =
         ]
 
 
+editFaction : Model -> Faction -> Html Msg
+editFaction model faction =
+    let
+        isSame =
+            (\fa fb -> fa == fb)
+
+        filtered =
+            List.filter (isSame faction) model.district.factions
+
+        action =
+            if (filtered == []) then
+                div [ class "add-faction btn-primary", onClick (FactionAdded faction.id) ] [ text "ADD" ]
+            else
+                div [ class "remove-faction btn-primary", onClick (FactionRemoved faction.id) ] [ text "DEL" ]
+    in
+        div [ class "information" ]
+            [ div [ class "name" ] [ a [ href <| "/factions/" ++ faction.slug ] [ text faction.name ] ]
+            , action
+            ]
+
+
+editFactions : Model -> Html Msg
+editFactions model =
+    div [] (List.map (editFaction model) model.allFactions)
+
+
 factionSection : Model -> Html Msg
-factionSection { district, factionsOpen } =
-    div [ class "row" ]
-        [ div [ class "faction" ]
-            [ header [ class "category" ]
-                [ div [ class (stateClass factionsOpen), onClick ToggleFactions ] []
-                , div [ class "name" ]
-                    [ text "Factions"
+factionSection model =
+    let
+        factions =
+            model.district.factions
+
+        factionsOpen =
+            model.factionsOpen
+    in
+        div [ class "row" ]
+            [ div [ class "faction" ]
+                [ header [ class "category" ]
+                    [ div [ class (stateClass factionsOpen), onClick ToggleFactions ] []
+                    , div [ class "name" ]
+                        [ text "Factions"
+                        ]
+                    , div [ class "rep" ] [ text "Tier" ]
+                      -- , div [ class "hold" ] [ text "Hold" ]
+                    , div [ class "status" ] [ text "Status" ]
                     ]
-                , div [ class "rep" ] [ text "Tier" ]
-                  -- , div [ class "hold" ] [ text "Hold" ]
-                , div [ class "status" ] [ text "Status" ]
-                ]
-            , div []
-                [ if factionsOpen then
-                    div [] (List.map viewFaction district.factions)
-                  else
-                    div [] []
+                , div []
+                    [ if factionsOpen then
+                        if model.editing then
+                            editFactions model
+                        else
+                            div [] (List.map viewFaction factions)
+                      else
+                        div [] []
+                    ]
                 ]
             ]
-        ]
 
 
 statsSection : Model -> Html Msg

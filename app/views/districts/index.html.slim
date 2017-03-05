@@ -4,6 +4,6 @@ h1 Listing districts
   '
 
 - @districts.each do |district|
-  = elm(district, expanded: true)
+  = elm(district, expanded: true, allFactions: current_user.game.factions)
 br
  
