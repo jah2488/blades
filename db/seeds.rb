@@ -11,6 +11,9 @@ game = Game.create(name: 'Blades On The Edge', user: user)
 
 district = District.create(name: 'The Gardens', game: game)
 faction = Faction.create(name: 'The Amber Vigil', game: game)
+faction2 = Faction.create(name: 'The Sanctuary of Salt', game: game)
+faction3 = Faction.create(name: 'Order of the Eternal Forge', game: game)
+faction4 = Faction.create(name: 'The Dark Flame', game: game)
 
 DistrictFaction.create!(district: district, faction: faction)
 
