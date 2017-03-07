@@ -4,9 +4,12 @@ Rollbar.configure do |config|
 
   config.access_token = ENV['ROLLBAR_ACCESS_TOKEN']
 
-  # Here we'll disable in 'test' and 'development':
-  unless Rails.env.production?
-      config.enabled = false
+  if Rails.env.production?
+    config.js_enabled = true
+    config.enabled    = true
+  else
+    config.enabled    = false
+    config.js_enabled = false
   end
 
   # By default, Rollbar will try to call the `current_user` controller method
@@ -39,7 +42,6 @@ Rollbar.configure do |config|
   # config.async_handler = Proc.new { |payload|
   #  Thread.new { Rollbar.process_from_async_handler(payload) }
   # }
-  config.js_enabled = true
   config.js_options = {
     accessToken: "7c8764dbd2d24e2897ae5353f0403371",
     captureUncaught: true,
