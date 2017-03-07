@@ -111,7 +111,7 @@ viewDistrict model =
 
         heading =
             header [ class "category" ]
-                [ div [ class (stateClass opened), onClick ToggleStats ] []
+                [ div [ class (stateClass opened), onClick <| Toggle Stats ] []
                 , div [ class "name" ] [ text "Info" ]
                 ]
 
@@ -188,7 +188,7 @@ factionSection model =
         div [ class "row" ]
             [ div [ class "faction" ]
                 [ header [ class "category" ] <|
-                    [ div [ class (stateClass factionsOpen), onClick ToggleFactions ] []
+                    [ div [ class (stateClass factionsOpen), onClick <| Toggle Factions ] []
                     , div [ class "name" ] [ text "Factions" ]
                     ]
                         ++ sectionInfo
@@ -224,7 +224,7 @@ mainSection model =
     div [ class "six columns" ]
         [ div [ classList [ ( "description", True ), ( "opened", model.descriptionOpen ) ] ]
             [ viewDescription model
-            , div [ class <| "fixed-footer " ++ (stateClass model.descriptionOpen), onClick ToggleDescription ] []
+            , div [ class <| "fixed-footer " ++ (stateClass model.descriptionOpen), onClick <| Toggle Description ] []
             ]
         ]
 
@@ -272,9 +272,9 @@ viewEdit editable editMode =
     if editable == True then
         if editMode == True then
             div []
-                [ a [ class "btn-primary", onClick CancelEdit ] [ text "Cancel" ]
-                , a [ class "btn-primary", onClick ResetEdit ] [ text "Reset" ]
-                , a [ class "btn-primary", onClick ExitEdit ] [ text "Save Changes" ]
+                [ a [ class "btn-primary", onClick <| Edit Cancel ] [ text "Cancel" ]
+                , a [ class "btn-primary", onClick <| Edit Reset ] [ text "Reset" ]
+                , a [ class "btn-primary", onClick <| Edit Exit ] [ text "Save Changes" ]
                 ]
         else
             a [ class "btn-primary", onClick EnterEdit ] [ text "Edit" ]

@@ -47,35 +47,46 @@ factionIDs model =
         |> Array.fromList
 
 
-update : Msg -> Model -> ( Model, Cmd Msg )
-update msg model =
-    case msg of
-        ToggleDescription ->
-            ( { model | descriptionOpen = not model.descriptionOpen }, Cmd.none )
-
-        ToggleFactions ->
-            ( { model | factionsOpen = not model.factionsOpen }, Cmd.none )
-
-        ToggleStats ->
-            ( { model | statsOpen = not model.statsOpen }, Cmd.none )
-
-        EnterEdit ->
+updateEdit : EditState -> Model -> ( Model, Cmd Msg )
+updateEdit state model =
+    case state of
+        Enter ->
             ( { model | editing = True }, Cmd.none )
 
-        ExitEdit ->
+        Exit ->
             ( { model | editing = False }, saveChanges model )
 
-        ResetEdit ->
+        Reset ->
             ( { model | district = model.originalDistrict }, Cmd.none )
 
-        CancelEdit ->
+        Cancel ->
             ( { model | editing = False, district = model.originalDistrict }, Cmd.none )
+
+
+updateToggle : ToggleSection -> Model -> ( Model, Cmd Msg )
+updateToggle section model =
+    case section of
+        Stats ->
+            ( { model | statsOpen = not model.statsOpen }, Cmd.none )
+
+        Factions ->
+            ( { model | factionsOpen = not model.factionsOpen }, Cmd.none )
+
+        Description ->
+            ( { model | descriptionOpen = not model.descriptionOpen }, Cmd.none )
+
+
+update : Msg -> Model -> ( Model, Cmd Msg )
+update msg ({ district } as model) =
+    case msg of
+        Toggle section ->
+            updateToggle section model
+
+        Edit state ->
+            updateEdit state model
 
         FactionAdded id ->
             let
-                district =
-                    model.district
-
                 newFaction =
                     List.filter (\f -> f.id == id) model.allFactions
 
@@ -86,9 +97,6 @@ update msg model =
 
         FactionRemoved id ->
             let
-                district =
-                    model.district
-
                 newFactions =
                     List.filter (\f -> f.id /= id) model.district.factions
 
@@ -99,9 +107,6 @@ update msg model =
 
         WealthChanged int ->
             let
-                district =
-                    model.district
-
                 newDistrict =
                     { district | wealth = int }
             in
@@ -109,9 +114,6 @@ update msg model =
 
         SecurityAndSafetyChanged int ->
             let
-                district =
-                    model.district
-
                 newDistrict =
                     { district | security_and_safety = int }
             in
@@ -119,9 +121,6 @@ update msg model =
 
         CriminalInfluenceChanged int ->
             let
-                district =
-                    model.district
-
                 newDistrict =
                     { district | criminal_influence = int }
             in
@@ -129,9 +128,6 @@ update msg model =
 
         OccultInfluenceChanged int ->
             let
-                district =
-                    model.district
-
                 newDistrict =
                     { district | occult_influence = int }
             in
@@ -139,9 +135,6 @@ update msg model =
 
         DescriptionChanged desc ->
             let
-                district =
-                    model.district
-
                 newDistrict =
                     { district | description = Just desc }
             in

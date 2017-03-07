@@ -24,15 +24,23 @@ type alias Model =
     }
 
 
+type EditState
+    = Enter
+    | Exit
+    | Reset
+    | Cancel
+
+
+type ToggleSection
+    = Stats
+    | Factions
+    | Description
+
+
 type Msg
     = NoOp
-    | EnterEdit
-    | ExitEdit
-    | ResetEdit
-    | CancelEdit
-    | ToggleStats
-    | ToggleFactions
-    | ToggleDescription
+    | Edit EditState
+    | Toggle ToggleSection
     | FactionAdded Int
     | FactionRemoved Int
     | DescriptionChanged String
