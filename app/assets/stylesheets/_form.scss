@@ -14,12 +14,18 @@ textarea:focus {
 
 .edit {
     height: 98%;
+    margin-top: 0.5em;
+}
+
+em.edit {
+    margin-right: 8px;
+    font-weight: 100;
 }
 
 textarea {
     width: 100%;
     min-height: 150px;
-    height: 100%;
+    height: 96%;
     margin: 0.1em 0 0;
     resize: none;
 }

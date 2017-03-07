@@ -12,6 +12,7 @@ type alias Flags =
 
 type alias Model =
     { district : District
+    , originalDistrict : District
     , factionsOpen : Bool
     , factionIDs : List Int
     , allFactions : List Faction
@@ -27,6 +28,8 @@ type Msg
     = NoOp
     | EnterEdit
     | ExitEdit
+    | ResetEdit
+    | CancelEdit
     | ToggleStats
     | ToggleFactions
     | ToggleDescription

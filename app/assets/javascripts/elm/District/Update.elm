@@ -65,6 +65,12 @@ update msg model =
         ExitEdit ->
             ( { model | editing = False }, saveChanges model )
 
+        ResetEdit ->
+            ( { model | district = model.originalDistrict }, Cmd.none )
+
+        CancelEdit ->
+            ( { model | editing = False, district = model.originalDistrict }, Cmd.none )
+
         FactionAdded id ->
             let
                 district =

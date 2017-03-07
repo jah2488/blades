@@ -9,6 +9,7 @@ import District.View exposing (..)
 init : Flags -> ( Model, Cmd Msg )
 init { district, allFactions, csrfToken_ } =
     ( { district = district
+      , originalDistrict = district
       , descriptionOpen = True
       , factionIDs = []
       , factionsOpen = False

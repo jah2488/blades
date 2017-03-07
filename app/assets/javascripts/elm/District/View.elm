@@ -1,6 +1,6 @@
 module District.View exposing (..)
 
-import Html exposing (Html, a, button, div, header, section, td, text, tr, br, textarea, input)
+import Html exposing (Html, a, button, div, header, section, td, text, tr, br, textarea, input, span, em)
 import Html.Attributes exposing (class, classList, href, type_)
 import Html.Events exposing (onClick, onInput)
 import Models exposing (..)
@@ -250,7 +250,12 @@ view model =
         [ div []
             [ header [ class "category" ]
                 [ div [ class "name" ]
-                    [ text model.district.name
+                    [ (if model.editing == True then
+                        (em [ class "edit" ] [ text "Editing" ])
+                       else
+                        span [] []
+                      )
+                    , text model.district.name
                     , a [ class "icon", href <| "/districts/" ++ model.district.slug ] []
                     ]
                 ]
@@ -266,7 +271,11 @@ viewEdit : Bool -> Bool -> Html Msg
 viewEdit editable editMode =
     if editable == True then
         if editMode == True then
-            a [ class "btn-primary", onClick ExitEdit ] [ text "Save Changes" ]
+            div []
+                [ a [ class "btn-primary", onClick CancelEdit ] [ text "Cancel" ]
+                , a [ class "btn-primary", onClick ResetEdit ] [ text "Reset" ]
+                , a [ class "btn-primary", onClick ExitEdit ] [ text "Save Changes" ]
+                ]
         else
             a [ class "btn-primary", onClick EnterEdit ] [ text "Edit" ]
     else
