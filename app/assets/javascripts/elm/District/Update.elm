@@ -43,7 +43,7 @@ factionIDs : Model -> Array Json.Value
 factionIDs model =
     model.district.factions
         |> List.map (.id)
-        |> List.map (\x -> Json.int x)
+        |> List.map Json.int
         |> Array.fromList
 
 
