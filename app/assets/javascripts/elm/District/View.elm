@@ -156,7 +156,8 @@ editFaction model faction =
                 div [ class "remove-faction btn-primary", onClick (FactionRemoved faction.id) ] [ text "DEL" ]
     in
         div [ class "information" ]
-            [ div [ class "name" ] [ a [ href <| "/factions/" ++ faction.slug ] [ text faction.name ] ]
+            [ div [ classList [ ( "name", True ), ( "current", filtered == [] ) ] ]
+                [ a [ href <| "/factions/" ++ faction.slug ] [ text faction.name ] ]
             , action
             ]
 
@@ -174,18 +175,23 @@ factionSection model =
 
         factionsOpen =
             model.factionsOpen
+
+        sectionInfo =
+            if model.editing then
+                [ div [ class "status" ] [ text "Action" ] ]
+            else
+                [ div [ class "rep" ] [ text "Tier" ]
+                  -- , div [ class "hold" ] [ text "Hold" ]
+                , div [ class "status" ] [ text "Status" ]
+                ]
     in
         div [ class "row" ]
             [ div [ class "faction" ]
-                [ header [ class "category" ]
+                [ header [ class "category" ] <|
                     [ div [ class (stateClass factionsOpen), onClick ToggleFactions ] []
-                    , div [ class "name" ]
-                        [ text "Factions"
-                        ]
-                    , div [ class "rep" ] [ text "Tier" ]
-                      -- , div [ class "hold" ] [ text "Hold" ]
-                    , div [ class "status" ] [ text "Status" ]
+                    , div [ class "name" ] [ text "Factions" ]
                     ]
+                        ++ sectionInfo
                 , div []
                     [ if factionsOpen then
                         if model.editing then

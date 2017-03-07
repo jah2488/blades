@@ -6,6 +6,7 @@ import Json.Encode as Json
 import Maybe
 import Models exposing (..)
 import Faction.Common exposing (..)
+import Utils exposing (patch)
 
 
 saveChanges : Model -> Cmd Msg
@@ -30,22 +31,9 @@ saveChanges model =
             Decode.string
 
         request =
-            patch model url (Http.jsonBody data) decode
+            patch model.csrfToken url (Http.jsonBody data) decode
     in
         Http.send SavedForm request
-
-
-patch : Model -> String -> Http.Body -> Decode.Decoder a -> Http.Request a
-patch model url body decoder =
-    Http.request
-        { method = "PATCH"
-        , headers = [ Http.header "X-CSRF-Token" model.csrfToken ]
-        , url = url
-        , body = body
-        , expect = Http.expectJson decoder
-        , timeout = Nothing
-        , withCredentials = False
-        }
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )

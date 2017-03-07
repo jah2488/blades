@@ -165,12 +165,19 @@
     background: white;
     border: 3px solid $black;
     margin: 1em 0;
+    padding-bottom: 0.5em;
 
     .name {
         display: inline-block;
         width: 70%;
         font-family: Kirsty, Helvetica, Arial;
         font-size: 1.7em;
+        transition: all 0.2s ease;
+
+        &.current {
+            margin-left: 1em;
+            transition: all 0.2s ease;
+        }
     }
 
     .icon {

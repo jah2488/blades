@@ -1,5 +1,11 @@
 module Models exposing (..)
 
+import Http
+
+
+type alias Response =
+    Result Http.Error String
+
 
 type alias Game =
     { id : Int

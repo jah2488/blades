@@ -6,6 +6,7 @@ import Models exposing (..)
 type alias Flags =
     { district : District
     , allFactions : List Faction
+    , csrfToken_ : String
     }
 
 
@@ -18,6 +19,7 @@ type alias Model =
     , descriptionOpen : Bool
     , editing : Bool
     , editable : Bool
+    , csrfToken : String
     }
 
 
@@ -35,3 +37,4 @@ type Msg
     | SecurityAndSafetyChanged Int
     | CriminalInfluenceChanged Int
     | OccultInfluenceChanged Int
+    | SavedForm Response

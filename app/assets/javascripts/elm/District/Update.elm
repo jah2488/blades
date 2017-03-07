@@ -1,6 +1,50 @@
 module District.Update exposing (..)
 
+import Array exposing (Array)
+import Http
+import Json.Decode as Decode
+import Json.Encode as Json
+import Maybe
+import Models exposing (..)
 import District.Common exposing (..)
+import Utils exposing (patch)
+
+
+saveChanges : Model -> Cmd Msg
+saveChanges ({ district, csrfToken } as model) =
+    let
+        url =
+            "/districts/" ++ (toString district.id)
+
+        data =
+            Json.object
+                [ ( "district"
+                  , Json.object
+                        [ ( "wealth", Json.int district.wealth )
+                        , ( "security_and_safety", Json.int district.security_and_safety )
+                        , ( "occult_influence", Json.int district.occult_influence )
+                        , ( "criminal_influence", Json.int district.criminal_influence )
+                        , ( "faction_ids", Json.array (factionIDs model) )
+                        , ( "description", Json.string <| Maybe.withDefault "" district.description )
+                        ]
+                  )
+                ]
+
+        decode =
+            Decode.string
+
+        request =
+            patch csrfToken url (Http.jsonBody data) decode
+    in
+        Http.send SavedForm request
+
+
+factionIDs : Model -> Array Json.Value
+factionIDs model =
+    model.district.factions
+        |> List.map (.id)
+        |> List.map (\x -> Json.int x)
+        |> Array.fromList
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -19,7 +63,7 @@ update msg model =
             ( { model | editing = True }, Cmd.none )
 
         ExitEdit ->
-            ( { model | editing = False }, Cmd.none )
+            ( { model | editing = False }, saveChanges model )
 
         FactionAdded id ->
             let
@@ -96,6 +140,12 @@ update msg model =
                     { district | description = Just desc }
             in
                 ( { model | district = newDistrict }, Cmd.none )
+
+        SavedForm (Ok status) ->
+            ( model, Cmd.none )
+
+        SavedForm (Err status) ->
+            ( model, Cmd.none )
 
         NoOp ->
             ( model, Cmd.none )

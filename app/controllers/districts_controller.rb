@@ -34,9 +34,23 @@ class DistrictsController < ApplicationController
   # PATCH/PUT /districts/1
   def update
     if @district.update(district_params)
-      redirect_to @district, notice: 'District was successfully updated.'
+      respond_to do |f|
+        f.json do
+          render json: "Success"
+        end
+        f.html do
+          redirect_to @district, notice: 'District was successfully updated.'
+        end
+      end
     else
-      render :edit
+      respond_to do |f|
+        f.json do
+          render json: "Failed"
+        end
+        f.html do
+          render :edit
+        end
+      end
     end
   end
 
@@ -47,13 +61,13 @@ class DistrictsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_district
-      @district = District.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_district
+    @district = District.find(params[:id])
+  end
 
-    # Only allow a trusted parameter "white list" through.
-    def district_params
-      params.require(:district).permit(:game_id, :name, :description, :faction_ids, :wealth, :security_and_safety, :criminal_influence, :occult_influence, faction_ids: [])
-    end
+  # Only allow a trusted parameter "white list" through.
+  def district_params
+    params.require(:district).permit(:game_id, :name, :description, :faction_ids, :wealth, :security_and_safety, :criminal_influence, :occult_influence, faction_ids: [])
+  end
 end

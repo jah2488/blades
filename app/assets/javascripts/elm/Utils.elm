@@ -1,8 +1,23 @@
 module Utils exposing (..)
 
 import Html exposing (Html, text)
+import Http
+import Json.Decode as Decode
 import Regex exposing (regex)
 import Markdown
+
+
+patch : String -> String -> Http.Body -> Decode.Decoder a -> Http.Request a
+patch csrfToken url body decoder =
+    Http.request
+        { method = "PATCH"
+        , headers = [ Http.header "X-CSRF-Token" csrfToken ]
+        , url = url
+        , body = body
+        , expect = Http.expectJson decoder
+        , timeout = Nothing
+        , withCredentials = False
+        }
 
 
 renderMarkdown : Maybe String -> a -> Html a
