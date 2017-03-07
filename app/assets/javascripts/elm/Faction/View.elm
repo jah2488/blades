@@ -1,6 +1,6 @@
 module Faction.View exposing (..)
 
-import Faction.Common exposing (..)
+import Faction.Types exposing (..)
 import Html exposing (Html, a, br, button, div, form, header, input, label, p, section, span, td, text, textarea, tr)
 import Html.Attributes exposing (attribute, checked, class, classList, for, href, id, max, min, type_, value)
 import Html.Events exposing (onCheck, onClick, onDoubleClick, onInput)

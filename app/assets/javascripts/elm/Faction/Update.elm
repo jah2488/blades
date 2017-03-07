@@ -5,7 +5,7 @@ import Json.Decode as Decode
 import Json.Encode as Json
 import Maybe
 import Models exposing (..)
-import Faction.Common exposing (..)
+import Faction.Types exposing (..)
 import Utils exposing (patch)
 
 

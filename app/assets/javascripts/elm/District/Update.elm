@@ -6,7 +6,7 @@ import Json.Decode as Decode
 import Json.Encode as Json
 import Maybe
 import Models exposing (..)
-import District.Common exposing (..)
+import District.Types exposing (..)
 import Utils exposing (patch)
 
 

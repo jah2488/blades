@@ -5,7 +5,7 @@ import Html.Attributes exposing (class, classList, href, type_)
 import Html.Events exposing (onClick, onInput)
 import Models exposing (..)
 import Faction.Utils exposing (tier)
-import District.Common exposing (..)
+import District.Types exposing (..)
 import Utils exposing (..)
 
 

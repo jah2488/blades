@@ -1,7 +1,7 @@
 module Faction exposing (..)
 
 import Html
-import Faction.Common exposing (Flags, Model, Msg)
+import Faction.Types exposing (Flags, Model, Msg)
 import Faction.Update
 import Faction.View
 

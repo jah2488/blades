@@ -1,4 +1,4 @@
-module District.Common exposing (..)
+module District.Types exposing (..)
 
 import Models exposing (..)
 

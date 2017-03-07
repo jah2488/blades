@@ -1,4 +1,4 @@
-module Faction.Common exposing (..)
+module Faction.Types exposing (..)
 
 import Http
 import Models exposing (..)

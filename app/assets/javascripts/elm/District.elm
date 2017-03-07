@@ -1,7 +1,7 @@
 module District exposing (..)
 
 import Html
-import District.Common exposing (..)
+import District.Types exposing (..)
 import District.Update exposing (..)
 import District.View exposing (..)
 

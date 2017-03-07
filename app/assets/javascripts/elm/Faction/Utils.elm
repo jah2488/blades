@@ -2,7 +2,7 @@ module Faction.Utils exposing (..)
 
 import Html exposing (Html, span, text)
 import Html.Attributes exposing (class)
-import Faction.Common exposing (Msg)
+import Faction.Types exposing (Msg)
 
 
 status : Int -> Html Msg
