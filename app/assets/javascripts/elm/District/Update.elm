@@ -23,15 +23,15 @@ update msg model =
             District.Update.Factions.update action model
 
         SavedForm (Ok status) ->
-            doNothing model
+            ignore model
 
         SavedForm (Err status) ->
-            doNothing model
+            ignore model
 
         NoOp ->
-            doNothing model
+            ignore model
 
 
-doNothing : Model -> ( Model, Cmd Msg )
-doNothing model =
+ignore : Model -> ( Model, Cmd Msg )
+ignore model =
     model ! []
