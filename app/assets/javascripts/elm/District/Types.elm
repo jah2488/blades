@@ -34,18 +34,26 @@ type EditState
 type ToggleSection
     = Stats
     | Factions
-    | Description
+    | Descriptions
+
+
+type Field
+    = Description String
+    | Wealth Int
+    | SecurityAndSafety Int
+    | CriminalInfluence Int
+    | OccultInfluence Int
+
+
+type FactionAction
+    = Add Int
+    | Remove Int
 
 
 type Msg
     = NoOp
     | Edit EditState
     | Toggle ToggleSection
-    | FactionAdded Int
-    | FactionRemoved Int
-    | DescriptionChanged String
-    | WealthChanged Int
-    | SecurityAndSafetyChanged Int
-    | CriminalInfluenceChanged Int
-    | OccultInfluenceChanged Int
+    | Changed Field
+    | FactionList FactionAction
     | SavedForm Response

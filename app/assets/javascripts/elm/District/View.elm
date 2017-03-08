@@ -117,10 +117,10 @@ viewDistrict model =
 
         body =
             if opened == True then
-                [ viewStat "Wealth" district.wealth model.editing WealthChanged
-                , viewStat "Security & Safety" district.security_and_safety model.editing SecurityAndSafetyChanged
-                , viewStat "Criminal Influence" district.criminal_influence model.editing CriminalInfluenceChanged
-                , viewStat "Occult Influence" district.occult_influence model.editing OccultInfluenceChanged
+                [ viewStat "Wealth" district.wealth model.editing (Changed << Wealth)
+                , viewStat "Security & Safety" district.security_and_safety model.editing (Changed << SecurityAndSafety)
+                , viewStat "Criminal Influence" district.criminal_influence model.editing (Changed << CriminalInfluence)
+                , viewStat "Occult Influence" district.occult_influence model.editing (Changed << OccultInfluence)
                 ]
             else
                 []
@@ -151,9 +151,9 @@ editFaction model faction =
 
         action =
             if (filtered == []) then
-                div [ class "add-faction btn-primary", onClick (FactionAdded faction.id) ] [ text "ADD" ]
+                div [ class "add-faction btn-primary", onClick (FactionList (Add faction.id)) ] [ text "ADD" ]
             else
-                div [ class "remove-faction btn-primary", onClick (FactionRemoved faction.id) ] [ text "DEL" ]
+                div [ class "remove-faction btn-primary", onClick (FactionList (Remove faction.id)) ] [ text "DEL" ]
     in
         div [ class "information" ]
             [ div [ classList [ ( "name", True ), ( "current", filtered == [] ) ] ]
@@ -224,7 +224,7 @@ mainSection model =
     div [ class "six columns" ]
         [ div [ classList [ ( "description", True ), ( "opened", model.descriptionOpen ) ] ]
             [ viewDescription model
-            , div [ class <| "fixed-footer " ++ (stateClass model.descriptionOpen), onClick <| Toggle Description ] []
+            , div [ class <| "fixed-footer " ++ (stateClass model.descriptionOpen), onClick <| Toggle Descriptions ] []
             ]
         ]
 
@@ -236,7 +236,7 @@ viewDescription model =
             div [ class "edit" ]
                 [ text "Description (markdown)"
                 , br [] []
-                , textarea [ onInput DescriptionChanged ]
+                , textarea [ onInput <| (Changed << Description) ]
                     [ text <| Maybe.withDefault "Unknown" model.district.description ]
                 ]
 
@@ -277,6 +277,6 @@ viewEdit editable editMode =
                 , a [ class "btn-primary", onClick <| Edit Exit ] [ text "Save Changes" ]
                 ]
         else
-            a [ class "btn-primary", onClick EnterEdit ] [ text "Edit" ]
+            a [ class "btn-primary", onClick <| Edit Enter ] [ text "Edit" ]
     else
         div [] []
