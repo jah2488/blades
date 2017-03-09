@@ -1,0 +1,146 @@
+@import 'colors';
+
+.splash {
+    margin-top: -3px;
+    background: $black;
+    min-height: 30em;
+    height: 50vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    color: $white;
+
+    .login {
+        flex: 1 1 auto;
+        align-self: flex-end;
+
+        a {
+            border-color: inherit;
+            background-color: inherit;
+            background-image: linear-gradient(to bottom, $white 50%, $red 50%);
+            width: 6em;
+            height: 2.2em;
+            padding: 0;
+            line-height: 2em;
+            text-align: center;
+        }
+    }
+
+    h1 {
+        font-size: 10em;
+        color: inherit;
+        text-align: center;
+        flex: 1 1 auto;
+    }
+
+    h5 {
+        color: inherit;
+        flex: 1 1 auto;
+        font-family: 'UglyQua';
+        font-weight: normal;
+    }
+}
+
+.learn-more {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 25em;
+    height: 48vh;
+
+    a {
+        flex: 0 1 auto;
+        font-size: 2.5em;
+        border: 8px solid $black;
+    }
+}
+
+.features {
+    padding-top: 50px;
+    box-sizing: border-box;
+    min-height: 50em;
+    min-height: 90vh;
+    background: lighten(#EEEDEC, 5%);
+
+    h2 {
+        text-align: center;
+        font-size: 7em;
+    }
+
+    .feature-set {
+        display: flex;
+        flex-flow: wrap;
+        align-items: center;
+        justify-content: space-around;
+        height: 100%;
+
+        .feature {
+            display: flex;
+            flex: 0 1 auto;
+            align-items: center;
+            justify-content: center;
+            width: 25em;
+            height: 15em;
+            padding: 0.25em 0.5em;
+            margin: 2em 0;
+            border: 5px solid $black;
+
+            &.coming-soon {
+                position: relative;
+
+                &:after {
+                    content: "Coming Soon";
+                    background: desaturate($red, 50%);
+                    color: white;
+                    font-family: 'UglyQua';
+                    padding: 0.5em 0.75em;
+                    position: absolute;
+                    top: -10%;
+                    transform: skew(-25deg);
+                }
+            }
+
+            .title {
+                text-align: center;
+            }
+        }
+    }
+}
+
+footer.landing {
+    padding: 2em;
+    min-height: 25vh;
+    background: $black;
+
+    a {
+        font-size: 2em;
+        color: lighten($black, 10%);
+
+        &:hover {
+            color: darken($white, 10%);
+        }
+    }
+}
+@media (max-width: 600px) {
+    .splash h1 {
+        font-size: 5em;
+    }
+
+    .features h2 {
+        font-size: 3em;
+    }
+
+    .features .feature-set .feature {
+        width: 15em;
+    }
+
+    footer.landing {
+        text-align: center;
+
+        a,
+        p {
+            text-align: center;
+        }
+    }
+}

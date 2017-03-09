@@ -6,10 +6,11 @@ nav {
     justify-content: flex-end;
     height: 8.2em;
     width: 100%;
-    background: $gray;
+    background: $black;
+    color: $white;
     padding: 0.2em;
     margin-top: -2px;
-    margin-bottom: 1.75rem;
+    margin-bottom: 2.75rem;
 
     .list {
         display: flex;
@@ -32,13 +33,18 @@ nav {
 
             &.action {
                 flex-grow: 1;
-                transition: 0.5s all ease;
+                transition: 0.2s all ease;
+                text-decoration: none;
+
+                p {
+                    color: $white;
+                }
 
                 &:hover {
                     & > * {
                         color: $white;
                     }
-                    transition: 0.5s all ease;
+                    transition: 0.2s all ease;
                     background: darken($gray, 25%);
                 }
             }
@@ -49,11 +55,22 @@ nav {
             }
 
             form {
-                background: white;
                 margin: 0;
 
                 input {
                     margin: 0;
+                    border-color: inherit;
+                    background-color: inherit;
+                    background-image: linear-gradient(to bottom, $white 50%, $red 50%);
+                    width: 6em;
+                    height: 2.2em;
+                    padding: 0;
+                    line-height: 2em;
+                    text-align: center;
+
+                    &:hover {
+                        border-color: $white;
+                    }
                 }
             }
         }

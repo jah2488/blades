@@ -25,6 +25,6 @@ Rails.application.routes.draw do
       resources :factions
       resources :players
     end
-    root 'factions#index', as: :signed_out_root
+    root 'dashboard#landing', as: :signed_out_root
   end
 end

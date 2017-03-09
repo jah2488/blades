@@ -1,0 +1,33 @@
+section.splash
+  .login
+    = link_to 'Sign in', sign_in_path, class: 'btn-primary'    
+  h1 Risky Standard
+  h5
+    small Your notes now have a great effect
+section.learn-more
+  = link_to 'Learn More', '#features', class: 'btn-primary'
+section#features.features
+  h2 Features
+  
+  .feature-set
+    .feature
+      h4.title Organize Your Notes
+      
+    .feature
+      h4.title Quickly Make Edits To Factions and Players
+    
+    .feature
+      h4.title Share With Your Players To Build Together
+      
+    .feature.coming-soon
+      h4.title Roll Your Dice Right here
+      
+    .feature.coming-soon
+      h4.title Group Text Chat
+      
+    .feature.coming-soon
+      h4.title File / Image Upload
+footer.landing
+  p = link_to "Sign Up", sign_up_path
+  p = link_to "Sign In", sign_in_path
+  p = link_to "Blades In The Dark", "http://www.evilhat.com/home/blades-in-the-dark/" 
