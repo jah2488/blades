@@ -16,7 +16,7 @@ module ApplicationHelper
       elm_embed(name, id, flags).html_safe
     end
 
-    "<#{tag} id='#{id}'></#{tag}>".html_safe
+    "<#{tag} class='elm-embed' id='#{id}'></#{tag}>".html_safe
   end
 
   private

@@ -14,16 +14,24 @@ html
     #left
     #right
     nav
-      ul
+      .list
         - if signed_in?
-          li = link_to "Factions", categories_path
-          li = link_to "Districts", districts_path
+          .list-item
+            - if current_user.multiple_games?
+              = current_user.game
+              = link_to "Change" "#"
+            - else 
+              = current_user.game
+          = link_to categories_path, class: 'list-item action'
+            p Factions
+          = link_to districts_path, class: 'list-item action'
+            p Districts
           / li = link_to "Characters", characters_path
           / li = link_to "Players", players_path
-          li = button_to 'Sign out', sign_out_path, class: 'btn-primary', method: :delete
+          .list-item = button_to 'Sign out', sign_out_path, class: 'btn-primary', method: :delete
           / li = "Signed in as: #{current_user.email}"
         - else
-          li = link_to 'Sign in', sign_in_path, class: 'btn-primary'    
+          .list-item = link_to 'Sign in', sign_in_path, class: 'btn-primary'    
 
 
     - flash.each do |key, value|

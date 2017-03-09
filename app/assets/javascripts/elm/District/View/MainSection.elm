@@ -15,7 +15,7 @@ view model =
     div [ class "six columns" ]
         [ div [ classList [ ( "description", True ), ( "opened", model.descriptionOpen ) ] ]
             [ viewDescription model
-            , div [ class <| "fixed-footer " ++ (stateClass model.descriptionOpen), onClick <| Toggle Descriptions ] []
+              -- , div [ class <| "fixed-footer " ++ (stateClass model.descriptionOpen), onClick <| Toggle Descriptions ] []
             ]
         ]
 

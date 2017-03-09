@@ -1,0 +1,2 @@
+class UserPlayersController < ApplicationController
+end

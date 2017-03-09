@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170308052344) do
+ActiveRecord::Schema.define(version: 20170308203102) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -100,6 +100,7 @@ ActiveRecord::Schema.define(version: 20170308052344) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "description"
+    t.boolean "active", default: false
     t.index ["user_id"], name: "index_games_on_user_id"
   end
 
@@ -132,6 +133,15 @@ ActiveRecord::Schema.define(version: 20170308052344) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "user_players", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "player_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["player_id"], name: "index_user_players_on_player_id"
+    t.index ["user_id"], name: "index_user_players_on_user_id"
+  end
+
   create_table "users", id: :serial, force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -139,6 +149,7 @@ ActiveRecord::Schema.define(version: 20170308052344) do
     t.string "encrypted_password", limit: 128, null: false
     t.string "confirmation_token", limit: 128
     t.string "remember_token", limit: 128, null: false
+    t.integer "current_game_id"
     t.index ["email"], name: "index_users_on_email"
     t.index ["remember_token"], name: "index_users_on_remember_token"
   end
@@ -157,4 +168,6 @@ ActiveRecord::Schema.define(version: 20170308052344) do
   add_foreign_key "player_traumas", "players"
   add_foreign_key "player_traumas", "traumas"
   add_foreign_key "players", "games"
+  add_foreign_key "user_players", "players"
+  add_foreign_key "user_players", "users"
 end

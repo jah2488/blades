@@ -1,0 +1,12 @@
+
+= link_to 'New Game', new_game_path, class: 'btn-primary'
+h2 Games I'm Running
+- my_games.each do |game|
+  h4 = link_to game, game
+
+
+hr
+
+h2 Games I'm Playing
+- playing_games.each do |game|
+  h4 = link_to game

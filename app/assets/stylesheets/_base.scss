@@ -9,11 +9,18 @@
     src: font-url('Kirsty.ttf') format('truetype');
 }
 
+*,
+*:after,
+*:before {
+    box-sizing: inherit;
+}
+
 body,
 html {
+    box-sizing: border-box;
     height: 100%;
     margin: 0;
-    padding: 0;
+    padding: 0 12px 12px;
 
     a,
     div,
@@ -47,6 +54,7 @@ body {
 
 #left,
 #right {
+    z-index: 1000000;
     width: 12px;
     height: 100%;
     position: fixed;
