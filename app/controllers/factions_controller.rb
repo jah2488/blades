@@ -33,6 +33,7 @@ class FactionsController < ApplicationController
 
   # PATCH/PUT /factions/1
   def update
+    authorize @faction
     if @faction.update(faction_params)
       respond_to do |f|
         f.json do
@@ -49,6 +50,7 @@ class FactionsController < ApplicationController
 
   # DELETE /factions/1
   def destroy
+    authorize @faction
     @faction.destroy
     redirect_to factions_url, notice: 'Faction was successfully destroyed.'
   end

@@ -3,11 +3,12 @@ class GamesController < ApplicationController
 
   # GET /games
   def index
-    @games = Game.all
+    @games = policy_scope(Game)
   end
 
   # GET /games/1
   def show
+    authorize @game
   end
 
   # GET /games/new
@@ -17,6 +18,7 @@ class GamesController < ApplicationController
 
   # GET /games/1/edit
   def edit
+    authorize @game
   end
 
   # POST /games
@@ -33,6 +35,7 @@ class GamesController < ApplicationController
 
   # PATCH/PUT /games/1
   def update
+    authorize @game
     if @game.update(game_params)
       redirect_to @game, notice: 'Game was successfully updated.'
     else
@@ -42,6 +45,7 @@ class GamesController < ApplicationController
 
   # DELETE /games/1
   def destroy
+    authorize @game
     @game.destroy
     redirect_to games_url, notice: 'Game was successfully destroyed.'
   end

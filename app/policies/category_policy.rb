@@ -1,11 +1,27 @@
 class CategoryPolicy < ApplicationPolicy
-  def edit?
+  def new?
     user && user.id == 1
+  end
+
+  def edit?
+    new?
+  end
+
+  def create?
+    new?
+  end
+
+  def update?
+    new?
+  end
+
+  def destroy?
+    new?
   end
 
   class Scope < Scope
     def resolve
-      scope
+      scope.where(game: user.game)
     end
   end
 end

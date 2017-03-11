@@ -22,23 +22,27 @@ hold n =
 
 
 between : Int -> Int -> Int -> Bool
-between a b n =
-    n > a && n < b
+between n min max =
+    n > min && n < max
 
 
 tier : Int -> String
 tier rep =
-    if rep < 12 then
-        "-"
-    else if between 12 24 rep then
-        "I"
-    else if between 23 36 rep then
-        "II"
-    else if between 36 48 rep then
-        "III"
-    else if between 48 60 rep then
-        "IV"
-    else if between 60 84 rep then
-        "V"
-    else
-        "X"
+    let
+        within =
+            between rep
+    in
+        if rep <= 12 then
+            "-"
+        else if within 12 24 then
+            "I"
+        else if within 23 36 then
+            "II"
+        else if within 36 48 then
+            "III"
+        else if within 48 60 then
+            "IV"
+        else if within 60 84 then
+            "V"
+        else
+            "X"

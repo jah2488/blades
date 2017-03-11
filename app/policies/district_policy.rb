@@ -5,7 +5,7 @@ class DistrictPolicy < ApplicationPolicy
 
   class Scope < Scope
     def resolve
-      scope
+      scope.where(game: user.game)
     end
   end
 end

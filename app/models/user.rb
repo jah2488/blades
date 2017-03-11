@@ -10,7 +10,7 @@ class User < ApplicationRecord
   end
 
   def game
-    Game.find_by(id: current_game_id) || games.last
+    @game ||= Game.find_by(id: current_game_id) || games.last
   end
 
   def to_s

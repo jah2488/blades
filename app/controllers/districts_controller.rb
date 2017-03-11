@@ -3,7 +3,7 @@ class DistrictsController < ApplicationController
 
   # GET /districts
   def index
-    @districts = District.where(game: current_user.game)
+    @districts = policy_scope(District)
   end
 
   # GET /districts/1
@@ -22,6 +22,7 @@ class DistrictsController < ApplicationController
   # POST /districts
   def create
     @district = District.new(district_params)
+    authorize @district
     @district.game = current_user.game
 
     if @district.save
@@ -33,6 +34,7 @@ class DistrictsController < ApplicationController
 
   # PATCH/PUT /districts/1
   def update
+    authorize @district
     if @district.update(district_params)
       respond_to do |f|
         f.json do
@@ -56,6 +58,7 @@ class DistrictsController < ApplicationController
 
   # DELETE /districts/1
   def destroy
+    authorize @district
     @district.destroy
     redirect_to districts_url, notice: 'District was successfully destroyed.'
   end
