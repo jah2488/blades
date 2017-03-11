@@ -14,6 +14,7 @@ var Elm = merge(
   require_elm('Faction'),
   require_elm('District'),
   require_elm('Category'),
+  require_elm('Game'),
   require_elm('Nav')
 );
 

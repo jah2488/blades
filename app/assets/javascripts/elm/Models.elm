@@ -12,12 +12,13 @@ type alias Game =
     , user_id : Int
     , name : String
     , slug : String
+    , description : Maybe String
     }
 
 
 nullGame : Game
 nullGame =
-    { id = 0, user_id = 0, name = "No Game", slug = "no-game" }
+    { id = 0, user_id = 0, name = "No Game", slug = "no-game", description = Nothing }
 
 
 type alias Category =
