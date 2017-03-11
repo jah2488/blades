@@ -7,6 +7,14 @@ class DistrictPolicy < ApplicationPolicy
     new? && record.game.user == user
   end
 
+  def update?
+    edit?
+  end
+
+  def create?
+    new?
+  end
+
   class Scope < Scope
     def resolve
       scope.where(game: user.game)

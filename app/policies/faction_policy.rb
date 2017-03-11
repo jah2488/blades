@@ -1,11 +1,19 @@
 class FactionPolicy < ApplicationPolicy
 
   def new?
-    user && user == record.game.user
+    user && user.game.present?h
   end
-  
+
+  def create?
+    new?
+  end
+
   def edit?
     user && user == record.game.user
+  end
+
+  def update?
+    edit?
   end
 
   class Scope < Scope
