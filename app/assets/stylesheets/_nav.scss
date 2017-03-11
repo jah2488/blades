@@ -9,7 +9,7 @@ nav {
     background: $black;
     color: $white;
     padding: 0.2em;
-    margin-top: -2px;
+    margin-top: -3px;
     margin-bottom: 2.75rem;
 
     .list {
@@ -71,6 +71,62 @@ nav {
                     &:hover {
                         border-color: $white;
                     }
+                }
+            }
+        }
+    }
+}
+
+.mobile-menu {
+    @extend %glyphicon-option-vertical;
+}
+
+nav input[type='checkbox'] ~ .mobile-menu {
+    display: none;
+    color: white;
+    position: relative;
+    left: 2em;
+    top: 0.25em;
+    font-size: 3em;
+}
+
+nav > input[type='checkbox'] {
+    display: none;
+}
+
+nav input:checked ~ .mobile-menu {
+    display: none;
+    @extend %glyphicon-option-horizontal;
+}
+@media (max-width: 600px) {
+    nav {
+        height: 6.2em;
+
+        nav input[type='checkbox'] ~ .mobile-menu {
+            display: block;
+        }
+
+        input {
+            &:checked ~.mobile-menu {
+                left: 1em;
+            }
+
+            &~ .list {
+                .list-item {
+                    margin-right: 10000px;
+                }
+            }
+
+            &:checked ~ .list {
+                flex-direction: column;
+                z-index: 10000;
+                background: #333;
+                position: relative;
+                top: 19em;
+                left: -4em;
+
+                .list-item {
+                    margin-right: 0;
                 }
             }
         }

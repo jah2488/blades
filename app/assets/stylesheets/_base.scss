@@ -29,8 +29,17 @@ html {
     }
 }
 
+a {
+    color: $gray;
+
+    &:hover {
+        color: $white;
+    }
+}
+
 body {
     padding: 1em 0 2em;
+    font-size: 1.3em;
 
     &:before {
         top: 0;
