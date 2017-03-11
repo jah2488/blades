@@ -36,7 +36,7 @@ tier rep =
             "-"
         else if within 12 24 then
             "I"
-        else if within 23 36 then
+        else if within 24 36 then
             "II"
         else if within 36 48 then
             "III"

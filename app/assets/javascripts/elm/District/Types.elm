@@ -7,6 +7,7 @@ type alias Flags =
     { district : District
     , allFactions : List Faction
     , csrfToken_ : String
+    , editable : Bool
     }
 
 

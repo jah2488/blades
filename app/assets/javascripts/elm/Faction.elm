@@ -4,7 +4,6 @@ import Html
 import Faction.Types exposing (Flags, Model, Msg)
 import Faction.Update
 import Faction.View
-import Faction.Utils
 
 
 init : Flags -> ( Model, Cmd Msg )

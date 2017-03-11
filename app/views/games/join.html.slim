@@ -1,0 +1,11 @@
+h2 = @game.name
+
+h4  Create Your Account To Join
+
+
+
+= form_for User.new(current_game_id: @game.id) do |form|
+  = render partial: '/users/form', object: form
+  = form.hidden_field :current_game_id, value: @game.id
+  hr
+  = form.submit

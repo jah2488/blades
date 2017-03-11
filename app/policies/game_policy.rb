@@ -3,6 +3,10 @@ class GamePolicy < ApplicationPolicy
     user && record.user == user
   end
 
+  def join?
+    record.join_token
+  end
+
   def update?
     edit?
   end

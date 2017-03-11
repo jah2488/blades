@@ -2,7 +2,20 @@
 = link_to 'New Game', new_game_path, class: 'btn-primary'
 h2 Games I'm Running
 - my_games.each do |game|
-  h4 = link_to game, game
+  h4 
+    = link_to game, game
+  - if game.join_token
+    p
+      strong Join Link
+      br
+      = link_to game, join_game_path(game) + "?token=#{game.join_token}"
+    p 
+      strong Players
+      ul
+        li = game.user.email
+        - game.users do |user|
+          li = user.email
+      
 
 
 hr

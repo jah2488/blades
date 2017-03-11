@@ -11,6 +11,11 @@ class GamesController < ApplicationController
     authorize @game
   end
 
+  def join
+    @game = Game.find_by(slug: params[:id], join_token: params[:token])
+    authorize @game
+  end
+
   # GET /games/new
   def new
     @game = Game.new
