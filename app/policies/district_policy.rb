@@ -1,6 +1,6 @@
 class DistrictPolicy < ApplicationPolicy
   def new?
-    user && user.game.present?
+    user && user.game
   end
 
   def edit?

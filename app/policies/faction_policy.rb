@@ -1,7 +1,7 @@
 class FactionPolicy < ApplicationPolicy
 
   def new?
-    user && user.game.present?h
+    user && user.game
   end
 
   def create?
