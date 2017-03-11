@@ -2,14 +2,20 @@ module District.View.Header exposing (view)
 
 import Html exposing (Html, header, div, span, em, text, a)
 import Html.Attributes exposing (class, href)
+import Html.Events exposing (onClick)
 import District.Types exposing (..)
+import District.View.Utils exposing (stateClass)
 
 
 view : Model -> Html Msg
-view { editing, district } =
+view { editing, district, descriptionOpen } =
     header [ class "category" ]
         [ div [ class "name" ]
-            [ editTag editing, text district.name, iconLink ("/districts/" ++ district.slug) "icon" ]
+            [ div [ class (stateClass descriptionOpen), onClick <| Toggle Descriptions ] []
+            , editTag editing
+            , text district.name
+            , iconLink ("/districts/" ++ district.slug) "icon"
+            ]
         ]
 
 

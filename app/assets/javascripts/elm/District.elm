@@ -10,9 +10,9 @@ init : Flags -> ( Model, Cmd Msg )
 init { district, allFactions, csrfToken_, editable } =
     ( { district = district
       , originalDistrict = district
-      , descriptionOpen = True
+      , descriptionOpen = False
       , factionIDs = []
-      , factionsOpen = False
+      , factionsOpen = True
       , allFactions = allFactions
       , statsOpen = True
       , editing = False

@@ -18,9 +18,12 @@ view model =
     section [ class "district" ]
         [ div []
             [ Header.view model
-            , div [ class "row" ]
-                [ MainSection.view model
-                , SideBar.view model
-                ]
+            , if model.descriptionOpen == True then
+                div [ class "row" ]
+                    [ MainSection.view model
+                    , SideBar.view model
+                    ]
+              else
+                div [] []
             ]
         ]
