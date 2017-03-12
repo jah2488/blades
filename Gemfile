@@ -46,6 +46,7 @@ gem 'slim-rails'
 gem 'faker'
 gem 'pundit'
 
+gem 'skylight'
 gem 'scout_apm'
 gem 'rollbar'
 
