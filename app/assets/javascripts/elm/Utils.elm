@@ -20,8 +20,8 @@ patch csrfToken url body decoder =
         }
 
 
-renderMarkdown : Maybe String -> a -> Html a
-renderMarkdown string a =
+renderMarkdown : Maybe String -> Html a
+renderMarkdown string =
     case string of
         Just desc ->
             Markdown.toHtml [] desc

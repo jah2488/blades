@@ -32,4 +32,4 @@ viewDescription model =
                 ]
 
         False ->
-            (renderMarkdown model.district.description NoOp)
+            (renderMarkdown model.district.description)

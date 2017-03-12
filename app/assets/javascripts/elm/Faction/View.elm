@@ -68,7 +68,7 @@ viewDescription faction expanded editMode =
 
                 False ->
                     div [ class "faction description" ]
-                        [ renderMarkdown faction.description NoOp
+                        [ renderMarkdown faction.description
                         ]
 
         False ->

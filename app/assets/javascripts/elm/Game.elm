@@ -29,9 +29,11 @@ update msg model =
 
 view : Model -> Html Msg
 view model =
-    div []
-        [ h4 [] [ text model.game.name ]
-        , renderMarkdown model.game.description NoOp
+    div [ class "faction" ]
+        [ header [ class "category" ]
+            [ div [ class "name" ] [ text model.game.name ]
+            ]
+        , div [ class "description" ] [ renderMarkdown model.game.description ]
         ]
 
 
