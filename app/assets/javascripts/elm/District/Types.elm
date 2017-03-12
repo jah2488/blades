@@ -5,7 +5,6 @@ import Models exposing (..)
 
 type alias Flags =
     { district : District
-    , allFactions : List Faction
     , csrfToken_ : String
     , editable : Bool
     }
@@ -58,3 +57,4 @@ type Msg
     | Changed Field
     | FactionList FactionAction
     | SavedForm Response
+    | GetFactions FactionResponse

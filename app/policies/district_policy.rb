@@ -17,7 +17,7 @@ class DistrictPolicy < ApplicationPolicy
 
   class Scope < Scope
     def resolve
-      scope.where(game: user.game)
+      scope.preload(:factions, :characters, :game).where(game_id: user.current_game_id || user.game.id)
     end
   end
 end

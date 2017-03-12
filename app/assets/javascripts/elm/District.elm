@@ -7,13 +7,13 @@ import District.View exposing (..)
 
 
 init : Flags -> ( Model, Cmd Msg )
-init { district, allFactions, csrfToken_, editable } =
+init { district, csrfToken_, editable } =
     ( { district = district
       , originalDistrict = district
       , descriptionOpen = False
       , factionIDs = []
       , factionsOpen = True
-      , allFactions = allFactions
+      , allFactions = []
       , statsOpen = True
       , editing = False
       , editable = editable

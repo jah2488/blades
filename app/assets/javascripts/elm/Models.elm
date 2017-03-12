@@ -1,10 +1,15 @@
 module Models exposing (..)
 
 import Http
+import Array exposing (Array)
 
 
 type alias Response =
     Result Http.Error String
+
+
+type alias FactionResponse =
+    Result Http.Error (Array Faction)
 
 
 type alias Game =

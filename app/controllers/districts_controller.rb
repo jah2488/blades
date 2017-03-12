@@ -3,7 +3,8 @@ class DistrictsController < ApplicationController
 
   # GET /districts
   def index
-    @districts = policy_scope(District)
+    # @districts = policy_scope(District)
+    @districts = current_user.game.districts.preload(:characters, factions: [:category] )
   end
 
   # GET /districts/1

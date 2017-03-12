@@ -4,6 +4,12 @@ class FactionsController < ApplicationController
   # GET /factions
   def index
     @factions = policy_scope(Faction)
+    respond_to do |format|
+      format.html
+      format.json do
+        render json: @factions
+      end
+    end
   end
 
   # GET /factions/1

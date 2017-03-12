@@ -1,5 +1,6 @@
 module District.Update exposing (..)
 
+import Array exposing (toList)
 import District.Types exposing (..)
 import District.Update.Edit
 import District.Update.Toggle
@@ -27,6 +28,16 @@ update msg model =
 
         SavedForm (Err status) ->
             ignore model
+
+        GetFactions (Ok factions) ->
+            ( { model | allFactions = toList factions }, Cmd.none )
+
+        GetFactions (Err _) ->
+            let
+                err =
+                    Debug.log ("Could not fetch factions")
+            in
+                ignore model
 
         NoOp ->
             ignore model
