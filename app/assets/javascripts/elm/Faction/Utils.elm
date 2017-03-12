@@ -5,7 +5,7 @@ import Html.Attributes exposing (class)
 import Faction.Types exposing (Msg)
 
 
-status : Int -> Html Msg
+status : Int -> Html a
 status n =
     if n == (-3) then
         span [ class "war" ] [ text "war" ]

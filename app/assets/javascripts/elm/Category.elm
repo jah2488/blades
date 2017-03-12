@@ -3,7 +3,7 @@ module Category exposing (..)
 import Models exposing (..)
 import Html exposing (Html, a, button, div, header, td, text, tr)
 import Html.Attributes exposing (class, href)
-import Faction.Utils exposing (tier)
+import Faction.Utils exposing (tier, hold, status)
 
 
 type alias Flags =
@@ -36,8 +36,8 @@ viewFaction faction =
             [ a [ href <| "/factions/" ++ faction.slug ] [ text faction.name ]
             ]
         , div [ class "rep" ] [ text <| tier faction.reputation ]
-        , div [ class "hold" ] [ text <| toString faction.hold ]
-        , div [ class "status" ] [ text <| toString faction.faction_status ]
+        , div [ class "hold" ] [ text <| hold faction.hold ]
+        , div [ class "status" ] [ status faction.faction_status ]
         ]
 
 
